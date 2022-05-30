@@ -1,11 +1,13 @@
 using Identity_Sample.Areas.Identity.Helper;
+using Microsoft.EntityFrameworkCore;
+using Site.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
-// builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//     options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<DataBaseContext>(options =>
+    options.UseSqlServer(connectionString));
 
 // Indentity Context
 builder.Services.RegisterContextConfigs(connectionString);
