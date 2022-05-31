@@ -10,7 +10,8 @@
   {
     <li class="@(menus.Any(x=>x.Url == Model.currentPageUrl && x.PId == sub.Id)? "active": "") treeview">
       <a href="#">
-        <i class="fa fa-dashboard"></i> <span>@sub.Title</span>
+        <i class="@sub.IconClassName"></i> 
+        <span>@sub.Title</span>
         <span class="pull-left-container">
           <i class="fa fa-angle-right pull-left"></i>
         </span>
