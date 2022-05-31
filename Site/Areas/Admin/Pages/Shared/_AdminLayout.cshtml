@@ -61,7 +61,7 @@
         </form>
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        @await Html.PartialAsync("_SideBarItems", _menuRep)
+        @await Html.PartialAsync("_SideBarItems", (_menuRep, "/"))
 
       </section>
       <!-- /.sidebar -->

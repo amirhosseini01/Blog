@@ -1,6 +1,8 @@
 using Identity_Sample.Areas.Identity.Helper;
 using Microsoft.EntityFrameworkCore;
 using Site.Data;
+using Site.Repositories.Contracts;
+using Site.Repositories.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,9 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 builder.Services.RegisterContextConfigs(connectionString);
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+//DI Custom Services
+builder.Services.AddScoped<IMenuRep, MenuRep>();
 
 // Add services to the container.
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();

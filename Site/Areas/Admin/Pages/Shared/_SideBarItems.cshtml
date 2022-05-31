@@ -6,7 +6,7 @@
 
 <ul class="sidebar-menu" data-widget="tree">
   <li class="header">منو</li>
-  @foreach (var sub in menus)
+  @foreach (var sub in menus.Where(x=> x.PId is null))
   {
     <li class="@(menus.Any(x=>x.Url == Model.currentPageUrl && x.PId == sub.Id)? "active": "") treeview">
       <a href="#">
