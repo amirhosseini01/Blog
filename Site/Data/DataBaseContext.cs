@@ -8,6 +8,7 @@ public class DataBaseContext : DbContext
         : base(options)
     {
     }
-
+    public DbSet<Blog> Blogs { get; set; }
+    public DbSet<Category> Categories { get; set; }
     public DbSet<Menu> Menus { get; set; }
 }

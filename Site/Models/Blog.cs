@@ -1,0 +1,40 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace Site.Models;
+
+public class Blog : BaseEntity
+{
+    public int CategoryId { get; set; }
+
+    [Required]
+    [StringLength(maximumLength: 60)]
+    public string Title { get; set; }
+
+    [Required]
+    [StringLength(maximumLength: 160)]
+    public string MetaDescription { get; set; }
+
+    [Required]
+    public string Description { get; set; }
+
+    public bool IsHidden { get; set; }
+
+    [Required]
+    [StringLength(maximumLength: 450)]
+    public string ImgUrl { get; set; }
+
+    [Required]
+    [StringLength(maximumLength: 60)]
+    public string ImgAlt { get; set; }
+
+    [Required]
+    [StringLength(maximumLength: 60)]
+    public string ImgTitle { get; set; }
+
+    public string StructedMarkup { get; set; }
+
+    [StringLength(maximumLength: 450)]
+    public string CanonicalUrl { get; set; }
+
+    public virtual Category Category { get; set; }
+}
