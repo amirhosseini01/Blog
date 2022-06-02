@@ -4,7 +4,7 @@
 }
 
 @section Styles{
-<link rel="stylesheet" type="text/css" href="~/Admin/Lib/datatables/datatables.min.css" />
+<partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/DataTblCss.cshtml" />
 }
 <section class="content">
     <div class="row">
@@ -22,7 +22,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="box-body">
                     <table id="tbl" class="table">
                         <thead>
@@ -47,7 +47,6 @@
 @Html.AntiForgeryToken()
 
 @section Scripts{
-<script type="text/javascript" src="~/Admin/Lib/datatables/datatables.min.js"></script>
-<script type="text/javascript" src="~/Admin/Lib/datatables/datatablesHelper.js"></script>
+<partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/DataTblJs.cshtml" />
 <script type="text/javascript" src="~/Admin/js/pages/Blogs.js"></script>
 }
