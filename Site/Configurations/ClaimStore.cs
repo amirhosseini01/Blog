@@ -1,6 +1,6 @@
 namespace Site.Configurations;
 
-public static class ClaimStore
+public struct ClaimStore
 {
     public const string View = "View";
     public const string Add = "Add";
