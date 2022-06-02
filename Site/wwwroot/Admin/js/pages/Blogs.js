@@ -10,5 +10,5 @@ $(document).ready(function () {
         { data: 'UpdateDate' },
         { data: 'PersianUpdateDate' }
     ]
-    initDataTbl("#tblBlogs", "/Admin/Blogs?handler=List", columns)
+    initDataTbl("#tbl", "/Admin/Blogs?handler=List", columns)
 });

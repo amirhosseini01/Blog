@@ -1,4 +1,6 @@
+var table;
 function initDataTbl(tblId, serverUrl, columns) {
+    if(table != undefined)
     table.destroy();
     table = $(tblId).DataTable({
         processing: true,
@@ -14,7 +16,7 @@ function initDataTbl(tblId, serverUrl, columns) {
             datatype: "json"
         },
         language: {
-            url: "/Persian.json"
+            url: "/Admin/Lib/datatables/Persian.json"
         },
         responsive: true,
         select: true,
