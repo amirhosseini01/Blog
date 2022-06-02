@@ -31,8 +31,6 @@ public class Blog : BaseEntity
     [StringLength(maximumLength: 60)]
     public string ImgTitle { get; set; }
 
-    public string StructedMarkup { get; set; }
-
     [StringLength(maximumLength: 450)]
     public string CanonicalUrl { get; set; }
 
