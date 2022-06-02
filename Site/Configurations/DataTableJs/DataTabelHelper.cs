@@ -4,16 +4,19 @@ public static class DataTabelHelper
 {
     public static void GetDataFromRequest(this HttpRequest Request, out FiltersFromRequestDataTable filtersFromRequest)
     {
-        filtersFromRequest = new();
-        filtersFromRequest.Draw = Request.Form["draw"].FirstOrDefault();
-        filtersFromRequest.Start = Request.Form["start"].FirstOrDefault();
-        filtersFromRequest.Length = Request.Form["length"].FirstOrDefault();
-        filtersFromRequest.SortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-        filtersFromRequest.SortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-        filtersFromRequest.SearchValue = Request.Form["search[value]"].FirstOrDefault();
+        filtersFromRequest = new()
+        {
+            Draw = Request.Form["draw"].FirstOrDefault(),
+            Start = Request.Form["start"].FirstOrDefault(),
+            Length = Request.Form["length"].FirstOrDefault(),
+            SortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault(),
+            SortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault(),
+            SearchValue = Request.Form["search[value]"].FirstOrDefault(),
+            SortColumnIndex = Request.Form["order[0][column]"].FirstOrDefault()
+        };
+
         filtersFromRequest.PageSize = filtersFromRequest.Length != null ? Convert.ToInt32(filtersFromRequest.Length) : 0;
         filtersFromRequest.Skip = filtersFromRequest.Start != null ? Convert.ToInt32(filtersFromRequest.Start) : 0;
-        filtersFromRequest.SortColumnIndex = Request.Form["order[0][column]"].FirstOrDefault();
 
         filtersFromRequest.SearchValue = filtersFromRequest.SearchValue?.ToLower();
     }
