@@ -16,6 +16,7 @@ builder.Services.RegisterContextConfigs(connectionString);
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 //DI Custom Services
 builder.Services.AddScoped<IMenuRep, MenuRep>();
 
