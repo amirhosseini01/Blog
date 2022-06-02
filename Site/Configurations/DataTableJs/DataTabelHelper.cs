@@ -1,4 +1,4 @@
-namespace Configurations.DataTableJs;
+namespace Site.Configurations.DataTableJs;
 
 public static class DataTabelHelper
 {
