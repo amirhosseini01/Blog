@@ -21,7 +21,7 @@
                     <i class="fa fa-save"></i>
                     </h3>
                 </div>
-                <form id="frm">
+                <form id="frm" method="post">
                     <div class="box-body">
                         <div class="row gy-5">
                             <div class="col-md-4">
@@ -112,6 +112,9 @@
                         </div>
 
                     </div>
+
+                    <input asp-for="VmInput.Id" type="hidden">
+                    <input asp-for="VmInput.ImgUrl" type="hidden">
                 </form>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">
