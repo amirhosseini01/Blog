@@ -1,4 +1,4 @@
-@page
+@page "{id?}"
 @model Site.Areas_Admin_Pages.BlogDetailModel
 @{
     bool isCreateMode = Model.Id is null;
@@ -135,7 +135,12 @@
         </div>
     </div>
 </section>
+
 @section Scripts{
+    <partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/ImgJs/_ResizerImg.cshtml" />
+    <partial name="~/Pages/Shared/_ValidationScriptsPartial.cshtml" />
+    <script type="text/javascript" src="~/Admin/js/pages/BlogDetail.js"></script>
+    <script type="text/javascript" src="~/Admin/Lib/ajaxHelper.js"></script>
     <script>
         var modelImgUrl = ''
     </script>
@@ -150,10 +155,8 @@
         <script>
             var serverUrl = '@Url.Page("BlogDetail","Edit")'
             modelImgUrl = '@Model.VmInput.ImgUrl'
+            ShowImageHolder(imgRes= '#imgHolderRes', imgParent= '#imgHolder', srcVal = modelImgUrl)
         </script>
     }
-<partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/ImgJs/_ResizerImg.cshtml" />
-<partial name="~/Pages/Shared/_ValidationScriptsPartial.cshtml" />
-<script type="text/javascript" src="~/Admin/js/pages/BlogDetail.js"></script>
-<script type="text/javascript" src="~/Admin/Lib/ajaxHelper.js"></script>
+
 }

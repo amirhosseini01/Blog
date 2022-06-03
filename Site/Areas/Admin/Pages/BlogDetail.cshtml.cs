@@ -28,6 +28,24 @@ public class BlogDetailModel : PageModel
         Id = id;
 
         Categories = await _categoryRep.GetAll();
+
+        if (id is not null)
+        {
+            var entity = await _blogRep.GetById(id.Value);
+            VmInput = new()
+            {
+                CanonicalUrl = entity.CanonicalUrl,
+                CategoryId = entity.CategoryId,
+                Description = entity.Description,
+                Id = entity.Id,
+                ImgAlt = entity.ImgAlt,
+                IsHidden = entity.IsHidden,
+                ImgTitle = entity.ImgTitle,
+                MetaDescription = entity.MetaDescription,
+                ImgUrl = entity.ImgUrl,
+                Title = entity.Title,
+            };
+        }
     }
 
     public async Task<JsonResult> OnPostAdd(VmBlogDetail VmInput)
@@ -67,6 +85,47 @@ public class BlogDetailModel : PageModel
         };
 
         await _blogRep.Add(entity);
+        var result = await _blogRep.Save();
+        return new JsonResult(result);
+    }
+
+    public async Task<JsonResult> OnPostEdit(VmBlogDetail VmInput)
+    {
+        if (!ModelState.IsValid || VmInput.Id is null || VmInput.Id <= 0)
+        {
+            return new JsonResult(new ResponsePayload(false, "خطا در اطلاعات ورودی"));
+        }
+
+        var entity = await _blogRep.GetById(VmInput.Id.Value);
+        if (entity is null)
+        {
+            return new JsonResult(new ResponsePayload(false, "موردی یافت نشد"));
+        }
+
+        if (!string.IsNullOrEmpty(VmInput.ImgBase64))
+        {
+            var uploadRes = await VmInput.ImgBase64.SaveBase64("/images/blog/", new FileSizeType() { Size = 500 });
+            if (!uploadRes.Succeeded)
+            {
+                return new JsonResult(uploadRes);
+            }
+
+            entity.ImgUrl = uploadRes.Obj;
+        }
+
+        string currentUserId = User.GetLoggedInUserId<string>();
+        entity.Title = VmInput.Title;
+        entity.Description = VmInput.Description;
+        entity.UpdateDate = DateTime.Now;
+        entity.UpdateUserId = currentUserId;
+        entity.CanonicalUrl = VmInput.CanonicalUrl;
+        entity.MetaDescription = VmInput.MetaDescription;
+        entity.CategoryId = VmInput.CategoryId;
+        entity.ImgAlt = VmInput.ImgAlt;
+        entity.ImgTitle = VmInput.ImgTitle;
+        entity.IsHidden = VmInput.IsHidden;
+
+        _blogRep.Update(entity);
         var result = await _blogRep.Save();
         return new JsonResult(result);
     }

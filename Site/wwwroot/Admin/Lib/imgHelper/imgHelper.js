@@ -24,13 +24,20 @@ function ReadFile(input, imgRes, imgParent) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $(imgRes).attr('src', e.target.result);
-            $(imgParent).show();
+            ShowImageHolder(imgRes = imgRes, imgParent = imgParent, srcVal = e.target.result)  
         }
         reader.readAsDataURL(input.files[0]);
     }
     else {
-        $(imgRes).attr('src', "");
-        $(imgParent).hide();
+        HideImageHolder(imgRes = imgRes, imgParent = imgParent)
     }
+}
+
+function ShowImageHolder(imgRes, imgParent, srcVal) {
+    $(imgRes).attr('src', srcVal);
+    $(imgParent).show();
+}
+function HideImageHolder(imgRes, imgParent) {
+    $(imgRes).attr('src', "");
+    $(imgParent).show();
 }
