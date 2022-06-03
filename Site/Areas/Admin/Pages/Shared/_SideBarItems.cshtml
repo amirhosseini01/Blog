@@ -19,7 +19,7 @@
       <ul class="treeview-menu">
         @foreach (var child in menus.Where(x => x.PId == sub.Id))
         {
-          <li class="@child.Url.Contains(Model.currentPageUrl)">
+          <li class="@(child.Url.Contains(Model.currentPageUrl) ? "active": "")">
             <a href="@child.Url">
               <i class="fa fa-circle-o"></i>
               @child.Title
