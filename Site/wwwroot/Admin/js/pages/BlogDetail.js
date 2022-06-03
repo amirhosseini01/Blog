@@ -3,6 +3,11 @@ $(document).ready(function () {
 });
 
 function SubmitForm(url) {
+    $("#frm").validate();
+
+    if (!$("#frm").valid()) {
+        return
+    }
     AjaxCaller(type = "post", url = url, data = $('#frm').serialize(), callbackFunction = function (res) {
         Toast(res.Succeeded,res.Message)
         if(res.Succeeded){
