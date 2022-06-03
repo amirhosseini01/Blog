@@ -11,5 +11,5 @@ function Toast(succeeded, message) {
     
     setTimeout(function(){ 
         x.className = x.className.replace("show", "");
-     }, 1500);
+     }, 2000);
   }
