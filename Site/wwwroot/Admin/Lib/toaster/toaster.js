@@ -3,10 +3,10 @@ function Toast(succeeded, message) {
     x.className = "show";
     x.innerText = message;
     if(succeeded){
-        x.className +=" bg-success"
+        x.className +=" bg-green"
     }
     else{
-        x.className +=" bg-danger"
+        x.className +=" bg-red"
     }
     
     setTimeout(function(){ 
