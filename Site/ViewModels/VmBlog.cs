@@ -44,6 +44,9 @@ public class VmBlogDetail
     public bool IsHidden { get; set; }
 
     [DisplayName("تصویر")]
+    public string ImgBase64 { get; set; }
+
+    [DisplayName("تصویر")]
     public string ImgUrl { get; set; }
 
     [DisplayName("ALT تصویر")]

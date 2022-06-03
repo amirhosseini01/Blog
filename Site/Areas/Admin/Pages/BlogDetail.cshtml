@@ -1,6 +1,7 @@
 @page
 @model Site.Areas_Admin_Pages.BlogDetailModel
 @{
+    bool isCreateMode = Model.Id is null;
 }
 
 <section class="content">
@@ -9,7 +10,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                    @if (Model.Id is null)
+                    @if (isCreateMode)
                     {
                         
                             <span>افزودن</span>
@@ -74,15 +75,15 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label asp-for="VmInput.ImgUrl"></label> <span class="text-danger">*</span>
+                                    <label asp-for="VmInput.ImgBase64"></label> <span class="text-danger">*</span>
                                     <input type="file" id="imgInput" class="form-control" onchange="ReadFile(input= this, imgRes= '#imgHolderRes', imgParent= '#imgHolder')">
-                                    <span asp-validation-for="VmInput.ImgUrl" class="text-danger"></span>
+                                    <span asp-validation-for="VmInput.ImgBase64" class="text-danger"></span>
                                 </div>
                             </div>
 
-                            <div id="imgHolder" class="col-md-4" style="display: none;">
+                            <div id="imgHolder" class="col-md-6" style="display: none;">
                                 <div class="form-group">
-                                    <img id="imgHolderRes" src="" class="img-fluid">
+                                    <img id="imgHolderRes" src="" class="img-fluid" height="100">
                                 </div>
                             </div>
 
@@ -114,7 +115,7 @@
                     </div>
 
                     <input asp-for="VmInput.Id" type="hidden">
-                    <input asp-for="VmInput.ImgUrl" type="hidden">
+                    <input asp-for="VmInput.ImgBase64" type="hidden">
                 </form>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary" onclick="SubmitForm(serverUrl)">
@@ -127,8 +128,10 @@
     </div>
 </section>
 @section Scripts{
-    
-    @if(Model.Id is null)
+    <script>
+        var modelImgUrl = ''
+    </script>
+    @if(isCreateMode)
     {
         <script>
             var serverUrl = '@Url.Page("BlogDetail","Add")'
@@ -138,6 +141,7 @@
     {
         <script>
             var serverUrl = '@Url.Page("BlogDetail","Edit")'
+            modelImgUrl = '@Model.VmInput.ImgUrl'
         </script>
     }
 <partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/ImgJs/_ResizerImg.cshtml" />
