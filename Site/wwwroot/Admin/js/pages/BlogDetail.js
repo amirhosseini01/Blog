@@ -4,6 +4,11 @@ $(document).ready(function () {
 
 function SubmitForm(url) {
     AjaxCaller(type = "post", url = url, data = $('#frm').serialize(), callbackFunction = function (res) {
-
+        toast(res.Succeeded,res.Message)
+        if(res.Succeeded){
+            setTimeout(() => {
+                window.location.replace("/Admin/Blogs");
+            }, 1500);
+        }
     })
 }
