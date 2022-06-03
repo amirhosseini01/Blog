@@ -20,6 +20,7 @@ builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 //DI Custom Services
 builder.Services.AddScoped<IMenuRep, MenuRep>();
 builder.Services.AddScoped<IBlogRep, BlogRep>();
+builder.Services.AddScoped<ICategoryRep, CategoryRep>();
 
 // Add services to the container.
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();

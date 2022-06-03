@@ -49,4 +49,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
             return new ResponsePayload(true, Messages.SuccessSaved);
         }
     }
+
+    public async Task<List<T>> GetAll()
+    {
+        return await GetQuery().ToListAsync();
+    }
 }

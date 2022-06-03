@@ -10,19 +10,24 @@ namespace Site.Areas_Admin_Pages;
 public class BlogDetailModel : PageModel
 {
     private readonly IBlogRep _blogRep;
-    public BlogDetailModel(IBlogRep blogRep)
+    private readonly ICategoryRep _categoryRep;
+    public BlogDetailModel(IBlogRep blogRep, ICategoryRep categoryRep)
     {
         _blogRep = blogRep;
+        _categoryRep = categoryRep;
     }
 
     //properties
     public int? Id { get; set; }
     public VmBlogDetail VmInput { get; set; }
+    public List<Category> Categories { get; set; }
 
     //methods
-    public void OnGet(int? id)
+    public async Task OnGet(int? id)
     {
         Id = id;
+
+        Categories = await _categoryRep.GetAll();
     }
 
     public async Task<JsonResult> OnPostAdd(VmBlogDetail VmInput)

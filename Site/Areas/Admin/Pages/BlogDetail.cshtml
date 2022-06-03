@@ -30,6 +30,10 @@
                                     <label asp-for="VmInput.CategoryId"></label> <span class="text-danger">*</span>
                                     <select asp-for="VmInput.CategoryId" class="form-control">
                                         <option value="">انتخاب کنید</option>
+                                        @foreach (var item in Model.Categories)
+                                        {
+                                            <option value="@item.Id">@item.Title</option>
+                                        }
                                     </select>
                                     <span asp-validation-for="VmInput.CategoryId" class="text-danger"></span>
                                 </div>
