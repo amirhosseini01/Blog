@@ -75,14 +75,14 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label asp-for="VmInput.ImgUrl"></label> <span class="text-danger">*</span>
-                                    <input type="file" id="imgInput" class="form-control">
+                                    <input type="file" id="imgInput" class="form-control" onchange="ReadFile(input= this, imgRes= '#imgHolderRes', imgParent= '#imgHolder')">
                                     <span asp-validation-for="VmInput.ImgUrl" class="text-danger"></span>
                                 </div>
                             </div>
 
                             <div id="imgHolder" class="col-md-4" style="display: none;">
                                 <div class="form-group">
-                                    <img src="" class="img-fluid">
+                                    <img id="imgHolderRes" src="" class="img-fluid">
                                 </div>
                             </div>
 
@@ -117,7 +117,7 @@
                     <input asp-for="VmInput.ImgUrl" type="hidden">
                 </form>
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" onclick="SubmitForm(serverUrl)">
                         ارسال
                         <i class="fa fa-save"></i>
                     </button>
@@ -126,3 +126,21 @@
         </div>
     </div>
 </section>
+@section Scripts{
+    
+    @if(Model.Id is null)
+    {
+        <script>
+            var serverUrl = '@Url.Page("BlogDetail","Add")'
+        </script>
+    }
+    else
+    {
+        <script>
+            var serverUrl = '@Url.Page("BlogDetail","Edit")'
+        </script>
+    }
+<partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/ImgJs/_ResizerImg.cshtml" />
+<script type="text/javascript" src="~/Admin/js/pages/BlogDetail.js"></script>
+<script type="text/javascript" src="~/Admin/Lib/ajaxHelper.js"></script>
+}
