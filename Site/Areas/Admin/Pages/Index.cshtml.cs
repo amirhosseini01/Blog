@@ -1,6 +1,6 @@
 using Identity_Sample.Areas.Identity.Helper;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Site.Configurations;
+using Site.Configurations.ClaimHelper;
 
 namespace Site.Areas_Admin_Pages;
 

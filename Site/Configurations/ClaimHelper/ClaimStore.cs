@@ -1,4 +1,4 @@
-namespace Site.Configurations;
+namespace Site.Configurations.ClaimHelper;
 
 public struct ClaimStore
 {

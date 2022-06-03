@@ -4,7 +4,7 @@ namespace Site.Configurations;
 public static class ImgHelper
 {
     private static readonly string[] validExtentions = { ".jpg", ".png", ".jpeg", ".webp", ".jpeg-2000", ".pdf", ".doc", ".3gp", ".docx", ".txt", ".xlsx", ".mp4", ".mkv", ".3gp" };
-    public static async Task<ResponsePayload<string>> UploadFile(IFormFile userfile, string fileName, FileSizeType fileSizeTypes)
+    public static async Task<ResponsePayload<string>> UploadFile(this IFormFile userfile, string fileName, FileSizeType fileSizeTypes)
     {
         string serverPath = Directory.GetCurrentDirectory() + "/wwwroot";
         var ext = Path.GetExtension(userfile.FileName);
@@ -98,12 +98,5 @@ public static class ImgHelper
 
 public class FileSizeType
 {
-    public FileType Type { get; set; }
     public int Size { get; set; }
-}
-public enum FileType
-{
-    Image,
-    Document,
-    Video
 }
