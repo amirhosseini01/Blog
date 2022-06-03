@@ -110,6 +110,7 @@ public class BlogDetailModel : PageModel
                 return new JsonResult(uploadRes);
             }
 
+            entity.ImgUrl.DeleteFile();
             entity.ImgUrl = uploadRes.Obj;
         }
 

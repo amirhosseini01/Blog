@@ -62,6 +62,13 @@ public static class ImgHelper
         string fileName = Guid.NewGuid().ToString().Replace("-", "");
         return await UploadFile(file, filePath + fileName, fileSizeType);
     }
+    public static void DeleteFile(this string fileUrl)
+    {
+        string serverPath = Directory.GetCurrentDirectory() + "/wwwroot";
+        var file = serverPath + fileUrl;
+        if (File.Exists(file))
+            File.Delete(file);
+    }
     private static string GetFileExtension(string base64String)
     {
         string data;
