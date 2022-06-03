@@ -1,7 +1,7 @@
 var table;
-function initDataTbl(tblId, serverUrl, columns) {
-    if(table != undefined)
-    table.destroy();
+function initDataTbl(tblId, serverUrl, columns, columnDefs) {
+    if (table != undefined)
+        table.destroy();
     table = $(tblId).DataTable({
         processing: true,
         serverSide: true,
@@ -18,6 +18,7 @@ function initDataTbl(tblId, serverUrl, columns) {
         language: {
             url: "/Admin/Lib/datatables/Persian.json"
         },
+        columnDefs: columnDefs,
         responsive: true,
         select: true,
         columns: columns,
