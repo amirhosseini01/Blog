@@ -1,11 +1,15 @@
+using Identity_Sample.Areas.Identity.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Site.Configurations;
+using Site.Configurations.ClaimHelper;
 using Site.Configurations.DataTableJs;
 using Site.Repositories.Contracts;
 using Site.ViewModels;
 
 namespace Site.Areas_Admin_Pages;
+
+[ClaimRequirement(claimType: nameof(BlogsModel), claimValue: ClaimStore.View)]
 public class BlogsModel : PageModel
 {
     private readonly IBlogRep _blogRep;
