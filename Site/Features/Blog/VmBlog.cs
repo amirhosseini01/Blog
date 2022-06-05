@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Site.ViewModels;
+namespace Site.Features.Blog;
 
 public class VmBlogList
 {

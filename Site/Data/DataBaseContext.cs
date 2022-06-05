@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Site.Features.Blog;
 using Site.Models;
 
 namespace Site.Data;

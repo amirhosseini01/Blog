@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Site.Configurations;
 using Site.Configurations.ClaimHelper;
-using Site.Models;
-using Site.Repositories.Contracts;
+using Site.Features.Blog;
 using Site.ViewModels;
 
 namespace Site.Areas_Admin_Pages;

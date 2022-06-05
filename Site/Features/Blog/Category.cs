@@ -1,7 +1,8 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using Site.Models;
 
-namespace Site.Models;
+namespace Site.Features.Blog;
 
 public class Category : BaseEntity
 {
