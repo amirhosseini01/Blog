@@ -1,11 +1,12 @@
 namespace Site.ViewModels;
 public static class Messages
 {
-    public const string SuccessSaved = "Successfuly Saved.";
-    public const string FailToSave = "Error Occurred While Saving.";
+    public const string SuccessSaved = "عملیات با موفقیت انجام شد.";
+    public const string FailToSave = "خطا در انجام عملیات.";
 
-    public const string InvalidData = "Invalid Data.";
-    public const string NotFound = "No Item Was Founded.";
+    public const string InvalidData = "مقادیر ارسالی صحیح نمیباشد.";
+    public const string NotFound = "موردی یافت نشد.";
+    public const string ChosseFile = "یک فایل را انتخاب کنید.";
 
-    public const string SuccessfulyLoaded = "Successfuly Loaded.";
+    public const string SuccessfulyLoaded = "با موفقیت بارگذاری شد.";
 }
