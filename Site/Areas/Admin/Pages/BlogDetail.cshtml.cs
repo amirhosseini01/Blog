@@ -52,12 +52,12 @@ public class BlogDetailModel : PageModel
     {
         if (!ModelState.IsValid)
         {
-            return new JsonResult(new ResponsePayload(false, "خطا در اطلاعات ورودی"));
+            return new JsonResult(new ResponsePayload(false, Messages.InvalidData));
         }
 
         if (string.IsNullOrEmpty(VmInput.ImgBase64))
         {
-            return new JsonResult(new ResponsePayload(false, "فایل را وارد کنید"));
+            return new JsonResult(new ResponsePayload(false, Messages.ChosseFile));
         }
 
         var uploadRes = await VmInput.ImgBase64.SaveBase64("/images/blog/", new FileSizeType() { Size = 500 });
@@ -93,13 +93,13 @@ public class BlogDetailModel : PageModel
     {
         if (!ModelState.IsValid || VmInput.Id is null || VmInput.Id <= 0)
         {
-            return new JsonResult(new ResponsePayload(false, "خطا در اطلاعات ورودی"));
+            return new JsonResult(new ResponsePayload(false, Messages.InvalidData));
         }
 
         var entity = await _blogRep.GetById(VmInput.Id.Value);
         if (entity is null)
         {
-            return new JsonResult(new ResponsePayload(false, "موردی یافت نشد"));
+            return new JsonResult(new ResponsePayload(false, Messages.NotFound));
         }
 
         if (!string.IsNullOrEmpty(VmInput.ImgBase64))

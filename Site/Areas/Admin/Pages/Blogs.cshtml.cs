@@ -50,11 +50,11 @@ public class BlogsModel : PageModel
     public async Task<JsonResult> OnGetDelete(int itemId)
     {
         if (itemId <= 0)
-            return new JsonResult(new ResponsePayload(false, "مقادیر ارسالی صحیح نمیباشد."));
+            return new JsonResult(new ResponsePayload(false, Messages.InvalidData));
 
         var entity = await _blogRep.GetById(itemId);
         if (entity is null)
-            return new JsonResult(new ResponsePayload(false, "موردی یافت نشد"));
+            return new JsonResult(new ResponsePayload(false, Messages.NotFound));
         _blogRep.Remove(entity);
         return new JsonResult(await _blogRep.Save());
     }
