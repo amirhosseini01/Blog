@@ -61,6 +61,15 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label asp-for="VmInput.KeyWords"></label>
+                                    <span class="text-danger">*</span>
+                                    <textarea asp-for="VmInput.KeyWords" class="form-control"
+                                        rows="5" placeholder="کلمات کلیدی را با - از یکدیگر جدا کنید"></textarea>
+                                    <span asp-validation-for="VmInput.KeyWords" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label asp-for="VmInput.MetaDescription"></label>
                                     <span class="text-danger">*</span>
                                     <textarea asp-for="VmInput.MetaDescription" class="form-control"

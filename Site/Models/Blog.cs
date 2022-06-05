@@ -34,5 +34,9 @@ public class Blog : BaseEntity
     [StringLength(maximumLength: 450)]
     public string CanonicalUrl { get; set; }
 
+    [Required]
+    [StringLength(maximumLength: 500)]
+    public string KeyWords { get; set; }
+
     public virtual Category Category { get; set; }
 }

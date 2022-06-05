@@ -62,4 +62,9 @@ public class VmBlogDetail
     [DisplayName("لینک مقاله اصلی")]
     [StringLength(maximumLength: 450, ErrorMessage = "{0} باید حداکثر {1} کاراکتر باشد.")]
     public string CanonicalUrl { get; set; }
+
+    [DisplayName("کلمات کلیدی")]
+    [Required(ErrorMessage = "{0} را وارد کنید.")]
+    [StringLength(maximumLength: 500, MinimumLength = 2, ErrorMessage = "{0} باید بین {2} تا {1} کاراکتر باشد.")]
+    public string KeyWords { get; set; }
 }

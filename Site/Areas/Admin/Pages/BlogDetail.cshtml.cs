@@ -47,6 +47,7 @@ public class BlogDetailModel : PageModel
                 MetaDescription = entity.MetaDescription,
                 ImgUrl = entity.ImgUrl,
                 Title = entity.Title,
+                KeyWords = entity.KeyWords
             };
         }
     }
@@ -84,7 +85,8 @@ public class BlogDetailModel : PageModel
             CategoryId = VmInput.CategoryId,
             ImgAlt = VmInput.ImgAlt,
             ImgTitle = VmInput.ImgTitle,
-            IsHidden = VmInput.IsHidden
+            IsHidden = VmInput.IsHidden,
+            KeyWords = VmInput.KeyWords
         };
 
         await _blogRep.Add(entity);
@@ -128,6 +130,7 @@ public class BlogDetailModel : PageModel
         entity.ImgAlt = VmInput.ImgAlt;
         entity.ImgTitle = VmInput.ImgTitle;
         entity.IsHidden = VmInput.IsHidden;
+        entity.KeyWords = VmInput.KeyWords;
 
         _blogRep.Update(entity);
         var result = await _blogRep.Save();
