@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    CreateTbl()
+});
+
+function CreateTbl() {
     var columns = [
         { data: 'Id' },
         { data: 'Title' },
@@ -23,9 +27,13 @@ $(document).ready(function () {
         {
             data: 'Id',
             render: function (data, type, row, meta) {
-                return `<a href="/Admin/BlogDetail/${data}" class="btn btn-warning">
+                var html = `<a href="/Admin/BlogDetail/${data}" class="btn btn-warning btn-sm">
                             <i class="fa fa-edit"></i>
                         </a>`;
+                html += `<button type="button" onclick="DeleteItem('${data}')" class="btn btn-danger btn-sm margin">
+                                <i class="fa fa-trash"></i>
+                            </button>`;
+                return html;
             }
         }
     ]
@@ -39,4 +47,17 @@ $(document).ready(function () {
             orderData: [7]
         },
     ])
-});
+}
+
+
+function DeleteItem(id) {
+    DeleteAlert(callbackFunction = function () {
+        AjaxCaller(type = "get", url = '/Admin/Blogs?handler=Delete', data = { itemId: id }, callbackFunction = function (res) {
+            Toast(res.Succeeded, res.Message)
+            if (res.Succeeded) {
+                CreateTbl()
+            }
+        })
+
+    })
+}

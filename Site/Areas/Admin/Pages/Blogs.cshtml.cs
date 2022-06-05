@@ -46,4 +46,16 @@ public class BlogsModel : PageModel
         }).ToDataTableJs(filtersFromRequest);
         return new JsonResult(result);
     }
+
+    public async Task<JsonResult> OnGetDelete(int itemId)
+    {
+        if (itemId <= 0)
+            return new JsonResult(new ResponsePayload(false, "مقادیر ارسالی صحیح نمیباشد."));
+
+        var entity = await _blogRep.GetById(itemId);
+        if (entity is null)
+            return new JsonResult(new ResponsePayload(false, "موردی یافت نشد"));
+        _blogRep.Remove(entity);
+        return new JsonResult(await _blogRep.Save());
+    }
 }
