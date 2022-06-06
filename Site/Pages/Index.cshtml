@@ -8,138 +8,40 @@
     <div class="row gy-4 gy-md-0">
         <div class="col-md-8">
             <div class="row gy-4">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row gy-4 gy-md-0">
-                                <div class="col-md-4">
-                                    <img src="https://devblogs.microsoft.com/devops/wp-content/uploads/sites/6/2022/03/agile.png"
-                                        alt="" title="" loading="lazy" class="img-fluid">
-                                </div>
-                                <div class="col-md-8">
-                                    <h3>Agile</h3>
-                                    <p>
-                                        Agile is a software development methodology that is based on the iterative
-                                        development
-                                        cycle.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="d-flex">
-                                <div class="col-6 d-flex justify-content-start">
-                                    <a href="" class="btn btn-primary" title="">
-                                        ادامه مطلب
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                </div>
-                                <div class="col-6 d-flex justify-content-end">
-                                    <span>تاریخ بروزرسانی: الان</span>
+                @foreach (var item in Model.Blogs)
+                {
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row gy-4 gy-md-0">
+                                    <div class="col-md-4">
+                                        <img src="@item.ImgUrl"
+                                        alt="@item.ImgAlt" title="@item.Title" loading="lazy" class="img-fluid">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h3>@item.Title</h3>
+                                        <p>
+                                            @item.MetaDescription
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row gy-4 gy-md-0">
-                                <div class="col-md-4">
-                                    <img src="https://devblogs.microsoft.com/devops/wp-content/uploads/sites/6/2022/03/agile.png"
-                                        alt="" title="" loading="lazy" class="img-fluid">
-                                </div>
-                                <div class="col-md-8">
-                                    <h3>Agile</h3>
-                                    <p>
-                                        Agile is a software development methodology that is based on the iterative
-                                        development
-                                        cycle.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="d-flex">
-                                <div class="col-6 d-flex justify-content-start">
-                                    <a href="" class="btn btn-primary" title="">
-                                        ادامه مطلب
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                </div>
-                                <div class="col-6 d-flex justify-content-end">
-                                    <span>تاریخ بروزرسانی: الان</span>
+                            <div class="card-footer">
+                                <div class="d-flex">
+                                    <div class="col-6 d-flex justify-content-start">
+                                        <a href="/BlogDetail/@item.Id" class="btn btn-primary" title="@item.Title">
+                                            ادامه مطلب
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end">
+                                        <span>تاریخ بروزرسانی: @item.PersianUpdateDate</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row gy-4 gy-md-0">
-                                <div class="col-md-4">
-                                    <img src="https://devblogs.microsoft.com/devops/wp-content/uploads/sites/6/2022/03/agile.png"
-                                        alt="" title="" loading="lazy" class="img-fluid">
-                                </div>
-                                <div class="col-md-8">
-                                    <h3>Agile</h3>
-                                    <p>
-                                        Agile is a software development methodology that is based on the iterative
-                                        development
-                                        cycle.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="d-flex">
-                                <div class="col-6 d-flex justify-content-start">
-                                    <a href="" class="btn btn-primary" title="">
-                                        ادامه مطلب
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                </div>
-                                <div class="col-6 d-flex justify-content-end">
-                                    <span>تاریخ بروزرسانی: الان</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row gy-4 gy-md-0">
-                                <div class="col-md-4">
-                                    <img src="https://devblogs.microsoft.com/devops/wp-content/uploads/sites/6/2022/03/agile.png"
-                                        alt="" title="" loading="lazy" class="img-fluid">
-                                </div>
-                                <div class="col-md-8">
-                                    <h3>Agile</h3>
-                                    <p>
-                                        Agile is a software development methodology that is based on the iterative
-                                        development
-                                        cycle.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="d-flex">
-                                <div class="col-6 d-flex justify-content-start">
-                                    <a href="" class="btn btn-primary" title="">
-                                        ادامه مطلب
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                </div>
-                                <div class="col-6 d-flex justify-content-end">
-                                    <span>تاریخ بروزرسانی: الان</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
 
         </div>
@@ -148,19 +50,23 @@
                 <div class="col-12">
                     <h6>دسته بندی ها</h6>
                     <div class="list-group">
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                             <span class="badge bg-primary rounded-pill">14</span>
                         </a>
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                             <span class="badge bg-primary rounded-pill">14</span>
                         </a>
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                             <span class="badge bg-primary rounded-pill">14</span>
                         </a>
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                             <span class="badge bg-primary rounded-pill">14</span>
                         </a>
@@ -169,16 +75,20 @@
                 <div class="col-12">
                     <h6>آخرین مقاله ها</h6>
                     <div class="list-group">
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                         </a>
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                         </a>
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                         </a>
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                         </a>
                     </div>
@@ -186,16 +96,20 @@
                 <div class="col-12">
                     <h6>مقالات پیشنهادی</h6>
                     <div class="list-group">
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                         </a>
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                         </a>
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                         </a>
-                        <a href="" title="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="" title=""
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             A second item
                         </a>
                     </div>
