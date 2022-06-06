@@ -38,6 +38,7 @@ public class Blog : BaseEntity
     [Required]
     [StringLength(maximumLength: 500)]
     public string KeyWords { get; set; }
+    public int? OrderView { get; set; }
 
     public virtual Category Category { get; set; }
 }
