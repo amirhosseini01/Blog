@@ -10,6 +10,7 @@ public class Category : BaseEntity
     [StringLength(maximumLength:60)]
     public string Title { get; set; }
     public int? OrderView { get; set; }
+    public bool IsHidden { get; set; }
 
     public virtual ICollection<Blog> Blogs { get; set; }
 }
