@@ -23,6 +23,6 @@ public static class BlogService
     }
     private static IQueryable<Blog> BaseConditions(this IQueryable<Blog> query)
     {
-        return query.Where(x => !x.IsHidden);
+        return query.Where(x => !x.IsHidden && !x.Category.IsHidden);
     }
 }
