@@ -8,15 +8,23 @@ namespace Site.Pages;
 public class IndexModel : PageModel
 {
     private readonly IBlogRep _blogRep;
+    private readonly ICategoryRep _categoryRep;
 
-    public IndexModel(IBlogRep blogRep)
+    public IndexModel(IBlogRep blogRep, ICategoryRep categoryRep)
     {
         _blogRep = blogRep;
+        _categoryRep = categoryRep;
     }
 
     public List<VmBlogClientList> Blogs { get; set; }
+    public List<VmBlogClientShortLink> LatestBlogs { get; set; }
+    public List<VmBlogClientShortLink> RecommendedBlogs { get; set; }
+    public List<VmCategoryClientList> Categories { get; set; }
     public async Task OnGet()
     {
         Blogs = await _blogRep.GetQuery().GetForIndex(new VmRequestPagination(Take: 50));
+        RecommendedBlogs = await _blogRep.GetQuery().GetRecommended(new VmRequestPagination(Take: 4));
+        LatestBlogs = await _blogRep.GetQuery().GetLatest(new VmRequestPagination(Take: 4));
+        Categories = await _categoryRep.GetQuery().GetForIndex(new VmRequestPagination(Take: 4));
     }
 }
