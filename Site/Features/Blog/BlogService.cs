@@ -33,6 +33,24 @@ public static class BlogService
             })
             .OrderByDescending(x => x.Id).GetPagiantionQuery(vm).ToListAsync();
     }
+
+    public static async Task<List<VmBlogClientShortLink>> GetSimilars(this IQueryable<Blog> query, Blog currentBlog, VmRequestPagination vm)
+    {
+        return await query.BaseConditions()
+        .Where(x =>
+        x.Description.Contains(currentBlog.Title) ||
+        x.MetaDescription.Contains(currentBlog.Title) ||
+        x.Title.Contains(currentBlog.Title) ||
+        x.KeyWords.Contains(currentBlog.Title)
+        )
+            .Select(x => new VmBlogClientShortLink
+            {
+                Id = x.Id,
+                Title = x.Title,
+                OrderView = x.OrderView,
+            })
+            .OrderByDescending(x => x.Id).GetPagiantionQuery(vm).ToListAsync();
+    }
     public static async Task<List<VmBlogClientShortLink>> GetRecommended(this IQueryable<Blog> query, VmRequestPagination vm)
     {
         return await query.BaseConditions()

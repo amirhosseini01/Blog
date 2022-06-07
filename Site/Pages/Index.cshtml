@@ -63,9 +63,9 @@
                 <div class="col-12">
                     <h6>آخرین مقاله ها</h6>
                     <div class="list-group">
-                        @foreach (var item in Model.Blogs)
+                        @foreach (var item in Model.LatestBlogs)
                         {
-                            <a href="/BlogDetail/@item.Id" title="@item.Title"
+                            <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@item.Title"
                             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                 @item.Title
                             </a>
@@ -75,9 +75,9 @@
                 <div class="col-12">
                     <h6>مقالات پیشنهادی</h6>
                     <div class="list-group">
-                        @foreach (var item in Model.Blogs)
+                        @foreach (var item in Model.RecommendedBlogs)
                         {
-                            <a href="/BlogDetail/@item.Id" title="@item.Title"
+                            <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@item.Title"
                             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                 @item.Title
                             </a>

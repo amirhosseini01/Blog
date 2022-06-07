@@ -1,4 +1,4 @@
-@page
+@page "{id}"
 @model Site.Pages.BlogDetailModel
 @{
     ViewData["Title"] = "Home page";
@@ -7,12 +7,12 @@
 <div class="container-fluid rounded shadow p-5">
     <div class="d-flex justify-content-center">
         <div class="col-md-12 d-flex justify-content-center">
-            <h1>Title of page</h1>
+            <h1>@Model.Blog.Title</h1>
         </div>
     </div>
     <div class="d-flex justify-content-center">
         <div class="col-md-12 d-flex justify-content-center">
-            <p>this is text</p>
+            <p>@Model.Blog.MetaDescription</p>
         </div>
     </div>
 
@@ -20,11 +20,7 @@
 
     <div class="d-flex">
         <div class="col-md-12">
-            <p>this is text</p>
-            <p>this is text</p>
-            <p>this is text</p>
-            <p>this is text</p>
-            <p>this is text</p>
+            @Html.Raw(Model.Blog.Description)
         </div>
     </div>
 
@@ -33,7 +29,8 @@
     <div class="row">
         <div class="col-md-4">
             <div class="input-group mb-3">
-                <a href="https://google.com" class="form-control bg-light">google.com</a>
+                <a href="/BlogDetail/@Model.Blog.Id"
+                    class="form-control bg-light">@($"{Request.Host.ToString()}/BlogDetail/{Model.Blog.Id}")</a>
                 <span class="input-group-text btn btn-light border" id="basic-addon2">
                     <i class="bi bi-clipboard"></i>
                 </span>
@@ -45,86 +42,14 @@
                     <span>کلمات کلیدی:</span>
                 </div>
                 <div class="col-md-10">
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
-                    <span class="badge bg-light text-dark">
-                        <a href="" title="" class="text-decoration-none text-dark">
-                            Light
-                        </a>
-                    </span>
+                    @foreach (var item in Model.Blog.KeyWords.Split('-'))
+                    {
+                        <span class="badge bg-light text-dark">
+                            <a href="" title="" class="text-decoration-none text-dark">
+                                @item
+                            </a>
+                        </span>
+                    }
                 </div>
             </div>
         </div>
@@ -136,89 +61,50 @@
         <div class="col-md-4">
             <h6>دسته بندی ها</h6>
             <div class="list-group">
-                <a href="" title=""
+                @foreach (var item in Model.Categories)
+                {
+                    <a href="" title="@item.Title"
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                    <span class="badge bg-primary rounded-pill">14</span>
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                    <span class="badge bg-primary rounded-pill">14</span>
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                    <span class="badge bg-primary rounded-pill">14</span>
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                    <span class="badge bg-primary rounded-pill">14</span>
-                </a>
+                        @item.Title
+                        <span class="badge bg-primary rounded-pill">@item.BlogCount</span>
+                    </a>
+                }
             </div>
         </div>
         <div class="col-md-4">
             <h6>آخرین مقاله ها</h6>
             <div class="list-group">
-                <a href="" title=""
+                @foreach (var item in Model.LatestBlogs)
+                {
+                    <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@item.Title"
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
+                        @item.Title
+                    </a>
+                }
             </div>
         </div>
         <div class="col-md-4">
             <h6>مقالات پیشنهادی</h6>
             <div class="list-group">
-                <a href="" title=""
+                @foreach (var item in Model.RecommendedBlogs)
+                {
+                    <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@item.Title"
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
+                        @item.Title
+                    </a>
+                }
             </div>
         </div>
         <div class="col-md-4">
             <h6>مقالات مشابه</h6>
             <div class="list-group">
-                <a href="" title=""
+                @foreach (var item in Model.SimilarBlogs)
+                {
+                    <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@item.Title"
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
-                <a href="" title=""
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    A second item
-                </a>
+                        @item.Title
+                    </a>
+                }
             </div>
         </div>
     </div>

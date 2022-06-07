@@ -23,8 +23,9 @@ public class IndexModel : PageModel
     public async Task OnGet()
     {
         Blogs = await _blogRep.GetQuery().GetForIndex(new VmRequestPagination(Take: 50));
-        RecommendedBlogs = await _blogRep.GetQuery().GetRecommended(new VmRequestPagination(Take: 4));
-        LatestBlogs = await _blogRep.GetQuery().GetLatest(new VmRequestPagination(Take: 4));
-        Categories = await _categoryRep.GetQuery().GetForIndex(new VmRequestPagination(Take: 4));
+        const int take = 4;
+        RecommendedBlogs = await _blogRep.GetQuery().GetRecommended(new VmRequestPagination(Take: take));
+        LatestBlogs = await _blogRep.GetQuery().GetLatest(new VmRequestPagination(Take: take));
+        Categories = await _categoryRep.GetQuery().GetForIndex(new VmRequestPagination(Take: take));
     }
 }
