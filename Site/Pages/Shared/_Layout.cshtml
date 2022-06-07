@@ -26,8 +26,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">لیست مقالات</a>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="جستجو" aria-label="Search">
+                    <form method="get" class="d-flex" action="/Search">
+                        <input class="form-control me-2" type="search" name="q" value="@ViewData["SearchValue"]" placeholder="جستجو" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">جستجو</button>
                     </form>
                 </div>

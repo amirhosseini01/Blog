@@ -21,3 +21,9 @@ public class VmBlogClientShortLink
     public int? OrderView { get; set; }
     public string Title { get; set; }
 }
+
+public struct VmBlogFilter
+{
+    public string Q { get; set; }
+    public int? CategoryId { get; set; }
+}
