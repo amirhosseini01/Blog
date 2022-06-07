@@ -18,6 +18,9 @@ public class SearchModel : PageModel
         _blogRep = blogRep;
     }
     public List<VmBlogClientList> Blogs { get; set; }
+     public List<VmBlogClientShortLink> LatestBlogs { get; set; }
+    public List<VmBlogClientShortLink> RecommendedBlogs { get; set; }
+    public List<VmCategoryClientList> Categories { get; set; }
     public async Task OnGet(string q = null, int? categoryId = null)
     {
         ViewData["SearchValue"] = q;
@@ -26,5 +29,9 @@ public class SearchModel : PageModel
             Q = q,
             CategoryId = categoryId
         });
+        const int take = 4;
+        RecommendedBlogs = await _blogRep.GetQuery().GetRecommended(new VmRequestPagination(Take: take));
+        LatestBlogs = await _blogRep.GetQuery().GetLatest(new VmRequestPagination(Take: take));
+        Categories = await _categoryRep.GetQuery().GetForIndex(new VmRequestPagination(Take: take));
     }
 }
