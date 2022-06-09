@@ -144,9 +144,10 @@
         </div>
     </div>
 </section>
-
+@Html.AntiForgeryToken()
 @section Scripts{
     <partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/ImgJs/_ResizerImg.cshtml" />
+    <partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/_Tinymce.cshtml" />
     <partial name="~/Pages/Shared/_ValidationScriptsPartial.cshtml" />
     <script type="text/javascript" src="~/Admin/js/pages/BlogDetail.js"></script>
     <script>
