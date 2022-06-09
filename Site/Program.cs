@@ -1,3 +1,4 @@
+using AspNetCore.ReCaptcha;
 using Identity_Sample.Areas.Identity.Helper;
 using Microsoft.EntityFrameworkCore;
 using Site.Data;
@@ -18,6 +19,10 @@ builder.Services.RegisterContextConfigs(connectionString);
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+
+// google recaptcha
+builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
+
 //DI Custom Services
 builder.Services.AddScoped<IMenuRep, MenuRep>();
 builder.Services.AddScoped<IBlogRep, BlogRep>();

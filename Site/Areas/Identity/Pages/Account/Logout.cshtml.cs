@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
+using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity_Sample.Areas.Identity.Pages.Account
 {
+    [ValidateReCaptcha]
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -22,7 +24,6 @@ namespace Identity_Sample.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
         }
-
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();

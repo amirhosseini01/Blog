@@ -100,10 +100,10 @@ namespace Identity_Sample.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
             //todo: Remove Blow Line
-            // return LocalRedirect("/");
-            ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            return Page();
+            return LocalRedirect("/");
+            // ReturnUrl = returnUrl;
+            // ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            // return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
