@@ -1,9 +1,8 @@
 using Site.Data;
 using Site.Models;
-using Site.Repositories.Contracts;
 using Site.Repositories.Generics;
 
-namespace Site.Repositories.Implementations;
+namespace Site.Features.Menu;
 public class MenuRep : GenericRepository<Menu>, IMenuRep
 {
     private readonly DataBaseContext _context;

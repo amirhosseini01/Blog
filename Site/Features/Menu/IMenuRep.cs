@@ -1,7 +1,7 @@
 using Site.Models;
 using Site.Repositories.Generics;
 
-namespace Site.Repositories.Contracts;
+namespace Site.Features.Menu;
 public interface IMenuRep : IGenericRepository<Menu>
 {
 

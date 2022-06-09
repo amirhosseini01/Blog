@@ -1,6 +1,5 @@
 using Site.Data;
 using Site.Models;
-using Site.Repositories.Contracts;
 using Site.Repositories.Generics;
 
 namespace Site.Features.Blog;

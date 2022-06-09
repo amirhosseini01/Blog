@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using Site.Models;
 
-namespace Site.Models;
+namespace Site.Features.Menu;
 public class Menu : BaseEntity
 {
     [Required]

@@ -1,5 +1,5 @@
 var table;
-function initDataTbl(tblId, serverUrl, columns, columnDefs) {
+function initDataTbl(tblId, serverUrl, columns, columnDefs, ajaxDataFuncName = null) {
     if (table != undefined)
         table.destroy();
     table = $(tblId).DataTable({
@@ -11,6 +11,11 @@ function initDataTbl(tblId, serverUrl, columns, columnDefs) {
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("XSRF-TOKEN",
                     $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            data: function (d) {
+                if (ajaxDataFuncName != null) {
+                    ajaxDataFuncName(d)
+                }
             },
             type: "POST",
             datatype: "json"

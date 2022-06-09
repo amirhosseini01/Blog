@@ -3,8 +3,7 @@ using Identity_Sample.Areas.Identity.Helper;
 using Microsoft.EntityFrameworkCore;
 using Site.Data;
 using Site.Features.Blog;
-using Site.Repositories.Contracts;
-using Site.Repositories.Implementations;
+using Site.Features.Menu;
 
 var builder = WebApplication.CreateBuilder(args);
 

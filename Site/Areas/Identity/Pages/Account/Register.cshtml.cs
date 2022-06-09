@@ -97,7 +97,7 @@ namespace Identity_Sample.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
+        public IActionResult OnGetAsync(string returnUrl = null)
         {
             //todo: Remove Blow Line
             return LocalRedirect("/");
