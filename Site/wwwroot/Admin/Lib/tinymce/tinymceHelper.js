@@ -16,7 +16,10 @@ function initTinymce() {
         ],
         toolbar: 'codesample code ltr rtl preview searchreplace wordcount image',
         image_title: true,
-        images_upload_handler: image_upload_handler
+        images_upload_handler: image_upload_handler,
+        directionality : 'rtl',
+        language: 'fa_IR',
+        language_url: '/Admin/lib/tinymce/fa_IR.js'
     });
 }
 
