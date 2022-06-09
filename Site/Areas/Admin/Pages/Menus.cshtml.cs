@@ -19,16 +19,23 @@ public class MenusModel : PageModel
     }
 
     public int? PId { get; set; }
+    public VmMenuInput VmInput { get; set; }
     public void OnGet(int? pid)
     {
         PId = pid;
     }
+
+    public async Task<JsonResult> OnGetGetById(int itemId)
+    {
+        var entity = await _menuRep.GetById(itemId);
+        return new JsonResult(entity);
+    }
     public JsonResult OnPostList()
     {
         Request.GetDataFromRequest(out FiltersFromRequestDataTable filtersFromRequest);
-        
-         int? pid;
-        if(!int.TryParse(Request.Form["pid"].FirstOrDefault(), out int convertedPid))
+
+        int? pid;
+        if (!int.TryParse(Request.Form["pid"].FirstOrDefault(), out int convertedPid))
         {
             pid = null;
         }
@@ -47,7 +54,7 @@ public class MenusModel : PageModel
                                      x.Url.Contains(filtersFromRequest.SearchValue));
         }
 
-        var result = query.Where(x=>x.PId == pid).Select(x => new VmMenuList()
+        var result = query.Where(x => x.PId == pid).Select(x => new VmMenuList()
         {
             Id = x.Id,
             Url = x.Url,
@@ -59,6 +66,56 @@ public class MenusModel : PageModel
             PersianCreateDate = x.CreateDate.ToPersianDate(),
             PersianUpdateDate = x.UpdateDate.ToPersianDate()
         }).ToDataTableJs(filtersFromRequest);
+        return new JsonResult(result);
+    }
+
+    public async Task<JsonResult> OnPostAdd(VmMenuInput VmInput)
+    {
+        if (!ModelState.IsValid)
+        {
+            return new JsonResult(new ResponsePayload(false, Messages.InvalidData));
+        }
+
+        string currentUserId = User.GetLoggedInUserId<string>();
+        Menu entity = new()
+        {
+            Title = VmInput.Title,
+            Url = VmInput.Url,
+            CreateDate = DateTime.Now,
+            UpdateDate = DateTime.Now,
+            CreateUserId = currentUserId,
+            UpdateUserId = currentUserId,
+            IsHidden = false,
+            IconClassName = VmInput.IconClassName,
+            PId = VmInput.PId,
+        };
+
+        await _menuRep.Add(entity);
+        var result = await _menuRep.Save();
+        return new JsonResult(result);
+    }
+
+    public async Task<JsonResult> OnPostEdit(VmMenuInput VmInput)
+    {
+        if (!ModelState.IsValid || VmInput.Id is null || VmInput.Id <= 0)
+        {
+            return new JsonResult(new ResponsePayload(false, Messages.InvalidData));
+        }
+
+        var entity = await _menuRep.GetById(VmInput.Id.Value);
+        if (entity is null)
+        {
+            return new JsonResult(new ResponsePayload(false, Messages.NotFound));
+        }
+
+        string currentUserId = User.GetLoggedInUserId<string>();
+        VmInput.Title = VmInput.Title;
+        VmInput.Url = VmInput.Url;
+        VmInput.IconClassName = VmInput.IconClassName;
+        VmInput.PId = VmInput.PId;
+
+        _menuRep.Update(entity, currentUserId);
+        var result = await _menuRep.Save();
         return new JsonResult(result);
     }
     public async Task<JsonResult> OnGetChangeOrder(int id, int order)

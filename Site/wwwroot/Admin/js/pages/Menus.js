@@ -75,3 +75,33 @@ function DeleteItem(id) {
 function ajaxAddData(d) {
     d.pid = pid
 }
+
+function OpenModal_Custom(modalId = '#mainModal', frmId = '#frm') {
+    OpenModal(modalId = modalId, frmId = frmId)
+    $('#VmInput_PId').val(pid)
+}
+
+function FillModal(itemId) {
+    AjaxCaller(type = "get", url = '/Admin/Menus?handler=GetById', data = { itemId: itemId }, callbackFunction = function (res) {
+        if (res == null) {
+            Toast(false, 'خطا در دریافت اطلاعات')
+            return
+        }
+
+        OpenModal(modalId = '#mainModal', frmId = '#frm', isEdit = true)
+        FillFormWithData(res)
+        $('#VmInput_PId').val(pid)
+    })
+}
+
+function SubmitForm(url) {
+    $("#frm").validate();
+
+    if (!$("#frm").valid()) {
+        return
+    }
+    AjaxCaller(type = "post", url = url, data = $('#frm').serialize(), callbackFunction = function (res) {
+        Toast(res.Succeeded, res.Message)
+        table.draw()
+    })
+}
