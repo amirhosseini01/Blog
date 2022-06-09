@@ -16,8 +16,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         await _dbSet.AddAsync(entity);
     }
-    public void Update(T entity)
+    public void Update(T entity, string UpdateUserId)
     {
+        entity.UpdateDate = DateTime.Now;
+        entity.UpdateUserId = UpdateUserId;
         _dbSet.Update(entity);
     }
     public void Remove(T entity)

@@ -5,6 +5,13 @@ $(document).ready(function () {
 function CreateTbl() {
     var columns = [
         { data: 'Id' },
+        { 
+            data: 'OrderView',
+            "width": "5%",
+            render: function (data, type, row) {
+                return `<input type="number" class="form-control" value="${data}" onchange="ChangeOrder(${row.Id},this.value, 'Blogs')">`
+            }
+        },
         { data: 'Title' },
         { data: 'CategoryTitle' },
         { data: 'CategoryId', visible: false },

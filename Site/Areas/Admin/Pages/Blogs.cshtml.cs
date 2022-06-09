@@ -39,6 +39,7 @@ public class BlogsModel : PageModel
         var result = query.Select(x => new VmBlogList()
         {
             Id = x.Id,
+            OrderView =  x.OrderView,
             Title = x.Title,
             CategoryTitle = x.Category.Title,
             CategoryId = x.CategoryId,
@@ -48,6 +49,24 @@ public class BlogsModel : PageModel
             PersianCreateDate = x.CreateDate.ToPersianDate(),
             PersianUpdateDate = x.UpdateDate.ToPersianDate()
         }).ToDataTableJs(filtersFromRequest);
+        return new JsonResult(result);
+    }
+    public async Task<JsonResult> OnGetChangeOrder(int id, int order)
+    {
+        if (id <= 0 || order <= 0)
+        {
+            return new JsonResult(new ResponsePayload(false, Messages.InvalidData));
+        }
+
+        var entity = await _blogRep.GetById(id);
+        if (entity is null)
+        {
+            return new JsonResult(new ResponsePayload(false, Messages.NotFound));
+        }
+
+        entity.OrderView = order;
+        _blogRep.Update(entity, User.GetLoggedInUserId<string>());
+        var result = await _blogRep.Save();
         return new JsonResult(result);
     }
 

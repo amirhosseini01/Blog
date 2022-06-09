@@ -5,6 +5,7 @@ $(document).ready(function () {
 });
 
 function SubmitForm(url) {
+    tinyMCE.triggerSave();
     $("#frm").validate();
 
     if (!$("#frm").valid()) {

@@ -6,6 +6,7 @@ namespace Site.Features.Blog;
 public class VmBlogList
 {
     public int Id { get; set; }
+    public int? OrderView { get; set; }
     public string Title { get; set; }
     public string CategoryTitle { get; set; }
     public int CategoryId { get; set; }

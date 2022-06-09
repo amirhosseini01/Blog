@@ -121,8 +121,6 @@ public class BlogDetailModel : PageModel
         string currentUserId = User.GetLoggedInUserId<string>();
         entity.Title = VmInput.Title;
         entity.Description = VmInput.Description;
-        entity.UpdateDate = DateTime.Now;
-        entity.UpdateUserId = currentUserId;
         entity.CanonicalUrl = VmInput.CanonicalUrl;
         entity.MetaDescription = VmInput.MetaDescription;
         entity.CategoryId = VmInput.CategoryId;
@@ -131,7 +129,7 @@ public class BlogDetailModel : PageModel
         entity.IsHidden = VmInput.IsHidden;
         entity.KeyWords = VmInput.KeyWords;
 
-        _blogRep.Update(entity);
+        _blogRep.Update(entity , currentUserId);
         var result = await _blogRep.Save();
         return new JsonResult(result);
     }

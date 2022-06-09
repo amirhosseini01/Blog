@@ -24,3 +24,14 @@ function initDataTbl(tblId, serverUrl, columns, columnDefs) {
         columns: columns,
     });
 }
+
+
+function ChangeOrder(id, order, pageName) {
+    AjaxCaller(type = "get",
+        url = '/Admin/' + pageName + '?handler=ChangeOrder',
+        data = { id: id, order: order },
+        callbackFunction = function (res) {
+            Toast(res.Succeeded, res.Message)
+        }
+    )
+}
