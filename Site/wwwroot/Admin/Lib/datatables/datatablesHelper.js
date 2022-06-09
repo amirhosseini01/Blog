@@ -35,3 +35,13 @@ function ChangeOrder(id, order, pageName) {
         }
     )
 }
+
+function ToggleStatus(id, url) {
+    AjaxCaller(type = "get",
+        url = url,
+        data = { id: id },
+        callbackFunction = function (res) {
+            Toast(res.Succeeded, res.Message)
+        }
+    )
+}

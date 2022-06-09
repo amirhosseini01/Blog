@@ -21,7 +21,7 @@ function CreateTbl() {
                 return `
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ${data ? 'checked' : ''}>
+                                <input type="checkbox" ${data ? 'checked' : ''} onchange="ToggleStatus(${row.Id},'/Admin/Blogs?handler=ToggleStatus')">
                             </label>
                         </div>
                     `;
