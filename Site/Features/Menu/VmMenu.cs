@@ -32,7 +32,6 @@ public class VmMenuInput
     public string Url { get; set; }
 
     [DisplayName("کد پرنت")]
-    [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "{0} را انتخاب کنید.")]
     public int? PId { get; set; }
 
     [DisplayName("کلاس آیکن")]

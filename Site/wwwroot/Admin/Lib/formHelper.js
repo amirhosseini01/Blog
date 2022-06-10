@@ -1,5 +1,5 @@
 function FillFormWithData(obj,frmId = '#frm'){
-    $(frmId + " :input").each(function() {
+    $(frmId + " :input[name!='__RequestVerificationToken']").each(function() {
         var keyName = $(this).attr('keyName')
         $(this).val(obj[keyName])
     })

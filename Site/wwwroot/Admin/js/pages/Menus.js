@@ -91,6 +91,7 @@ function FillModal(itemId) {
         OpenModal(modalId = '#mainModal', frmId = '#frm', isEdit = true)
         FillFormWithData(res)
         $('#VmInput_PId').val(pid)
+        $('#VmInput_Id').val(itemId)
     })
 }
 
@@ -102,6 +103,9 @@ function SubmitForm(url) {
     }
     AjaxCaller(type = "post", url = url, data = $('#frm').serialize(), callbackFunction = function (res) {
         Toast(res.Succeeded, res.Message)
+        if(res.Succeeded){
+            $('#mainModal').modal('hide')
+        }
         table.draw()
     })
 }

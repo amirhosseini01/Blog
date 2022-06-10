@@ -87,7 +87,7 @@ public class MenusModel : PageModel
             UpdateUserId = currentUserId,
             IsHidden = false,
             IconClassName = VmInput.IconClassName,
-            PId = VmInput.PId,
+            PId = VmInput.PId == 0 ? null : VmInput.PId,
         };
 
         await _menuRep.Add(entity);
@@ -109,10 +109,10 @@ public class MenusModel : PageModel
         }
 
         string currentUserId = User.GetLoggedInUserId<string>();
-        VmInput.Title = VmInput.Title;
-        VmInput.Url = VmInput.Url;
-        VmInput.IconClassName = VmInput.IconClassName;
-        VmInput.PId = VmInput.PId;
+        entity.Title = VmInput.Title;
+        entity.Url = VmInput.Url;
+        entity.IconClassName = VmInput.IconClassName;
+        entity.PId = VmInput.PId == 0 ? null : VmInput.PId;
 
         _menuRep.Update(entity, currentUserId);
         var result = await _menuRep.Save();
