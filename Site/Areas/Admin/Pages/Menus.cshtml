@@ -25,6 +25,14 @@
                 </div>
 
                 <div class="box-body">
+                    @if(Model.PId is not null)
+                    {
+                        <div class="row margin">
+                        <div class="col-md-2">
+                            <a asp-area="Admin" asp-page="Menus" >بازگشت به صفحه نخست</a>
+                        </div>
+                    </div>
+                    }
                     <table id="tbl" class="table">
                         <thead>
                             <th>کد</th>
