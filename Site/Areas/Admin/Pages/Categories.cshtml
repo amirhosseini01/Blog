@@ -1,0 +1,102 @@
+@page
+@model Site.Areas_Admin_Pages.CategoriesModel
+@{
+    ViewData["Title"] = "مدیریت دسته بندی ها";
+}
+@section Styles{
+<partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/DataTableJs/_DataTblCss.cshtml" />
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        @ViewData["Title"]
+                        <i class="fa fa-list"></i>
+                    </h3>
+                    <div class="box-tools">
+                        <button type="button" onclick="OpenModal()" class="btn btn-success">
+                            افزودن
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <table id="tbl" class="table">
+                        <thead>
+                            <th>کد</th>
+                            <th>اولویت نمایش</th>
+                            <th>عنوان</th>
+                            <th>وضعیت انتشار</th>
+                            <th>تاریخ ایجاد</th>
+                            <th>تاریخ ایجاد</th>
+                            <th>تاریخ بروزرسانی</th>
+                            <th>تاریخ بروزرسانی</th>
+                            <th>عملیات</th>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@Html.AntiForgeryToken()
+
+<div class="modal fade in" id="mainModal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                <h4 id="modalTitle" class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluild">
+                    <form id="frm" method="post">
+                        <input type="hidden" asp-for="VmInput.Id" keyName="@nameof(Model.VmInput.Id)" />
+                        <div class="row gy-5">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.Title"></label> <span class="text-danger">*</span>
+                                    <input asp-for="VmInput.Title" class="form-control"
+                                        keyName="@nameof(Model.VmInput.Title)">
+                                    <span asp-validation-for="VmInput.Title" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button id="btnAdd" type="button" class="btn btn-primary pull-left" style="margin-right: 3px;" onclick="SubmitForm('/Admin/Categories?handler=Add')">
+                    ذخیره
+                    <i class="fa fa-save"></i>
+                </button>
+                <button id="btnEdit" type="button" class="btn btn-primary pull-left" style="margin-right: 3px;" onclick="SubmitForm('/Admin/Categories?handler=Edit')">
+                    ویرایش
+                    <i class="fa fa-save"></i>
+                </button>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">
+                    خروج
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+@section Scripts{
+<partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/DataTableJs/_DataTblJs.cshtml" />
+<partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/Sweetalert2/_Sweetalert2.cshtml" />
+<partial name="~/Pages/Shared/_ValidationScriptsPartial.cshtml" />
+<script type="text/javascript" src="~/Admin/lib/formHelper.js"></script>
+<script type="text/javascript" src="~/Admin/js/pages/Categories.js"></script>
+}
