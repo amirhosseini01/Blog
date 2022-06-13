@@ -9,7 +9,7 @@ using Site.ViewModels;
 
 namespace Site.Areas_Admin_Pages;
 
-[ClaimRequirement(claimType: nameof(BlogsModel), claimValue: ClaimStore.View)]
+[ClaimRequirement(claimType: nameof(MenusModel), claimValue: ClaimStore.View)]
 public class MenusModel : PageModel
 {
     private readonly IMenuRep _menuRep;
