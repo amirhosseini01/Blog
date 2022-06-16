@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Site.Features.Blog;
 using Site.ViewModels;
 
@@ -22,10 +23,26 @@ public class IndexModel : PageModel
     public List<VmCategoryClientList> Categories { get; set; }
     public async Task OnGet()
     {
-        Blogs = await _blogRep.GetQuery().GetForIndex(new VmRequestPagination(Take: 50));
+        Blogs = await _blogRep
+            .GetQuery()
+            .ConfigQuery()
+            .GetBlogs()
+            .AppendPagination(new VmRequestPagination(Take: 50))
+            .ToListAsync();
+
         const int take = 4;
-        RecommendedBlogs = await _blogRep.GetQuery().GetRecommended(new VmRequestPagination(Take: take));
-        LatestBlogs = await _blogRep.GetQuery().GetLatest(new VmRequestPagination(Take: take));
+        RecommendedBlogs = await _blogRep
+          .GetQuery()
+          .ConfigQuery()
+          .GetShortLink(BlogClientFilterType.Recommended)
+          .AppendPagination(new VmRequestPagination(Take: take))
+          .ToListAsync();
+
+        LatestBlogs = await _blogRep.GetQuery()
+        .ConfigQuery()
+        .GetShortLink(BlogClientFilterType.Latest)
+        .AppendPagination(new VmRequestPagination(Take: take))
+        .ToListAsync();
         Categories = await _categoryRep.GetQuery().GetForIndex(new VmRequestPagination(Take: take));
     }
 }

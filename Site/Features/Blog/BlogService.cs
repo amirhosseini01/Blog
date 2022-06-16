@@ -4,102 +4,70 @@ using Site.ViewModels;
 
 namespace Site.Features.Blog;
 
-public static class BlogService
+public static class BlogClientService
 {
-    public static async Task<List<VmBlogClientList>> GetForIndex(this IQueryable<Blog> query, VmRequestPagination vm)
+    public static IQueryable<Blog> ConfigQuery(this IQueryable<Blog> query)
     {
-        return await query.BaseConditions()
-            .Select(x => new VmBlogClientList
-            {
-                Id = x.Id,
-                Title = x.Title,
-                OrderView = x.OrderView,
-                MetaDescription = x.MetaDescription,
-                ImgUrl = x.ImgUrl,
-                ImgAlt = x.ImgAlt,
-                ImgTitle = x.ImgTitle,
-                PersianUpdateDate = x.UpdateDate.ToPersianDate(),
-            })
-            .OrderByDescending(x => x.OrderView).ThenByDescending(x => x.Id).GetPagiantionQuery(vm).ToListAsync();
+        return query.AsNoTracking().Where(x => !x.IsHidden && !x.Category.IsHidden);
     }
-    public static async Task<List<VmBlogClientList>> SearchInBlogs(this IQueryable<Blog> query, VmRequestPagination vm, VmBlogFilter vmFilter)
+    public static IQueryable<VmBlogClientList> GetBlogs(this IQueryable<Blog> query)
     {
-        query = query.BaseConditions();
+        return query.SelectBlogs();
+    }
+    public static IQueryable<VmBlogClientShortLink> GetShortLink(this IQueryable<Blog> query, BlogClientFilterType filterType)
+    {
+        var selectQuery = query.Select(x => new VmBlogClientShortLink
+        {
+            Id = x.Id,
+            Title = x.Title,
+            OrderView = x.OrderView,
+        });
 
+        return filterType switch
+        {
+            BlogClientFilterType.Recommended => selectQuery.OrderByDescending(x => x.OrderView),
+            BlogClientFilterType.Latest => selectQuery.OrderByDescending(x => x.Id),
+            _ => selectQuery,
+        };
+    }
+    public static IQueryable<VmBlogClientList> GetBlogs(this IQueryable<Blog> query, VmBlogFilter vmFilter)
+    {
         if (!string.IsNullOrWhiteSpace(vmFilter.Q))
         {
-            query = query.GetSearchQuery(vmFilter.Q);
+            query = query.Where(x =>
+                x.Description.Contains(vmFilter.Q) ||
+                x.MetaDescription.Contains(vmFilter.Q) ||
+                x.Title.Contains(vmFilter.Q) ||
+                x.KeyWords.Contains(vmFilter.Q) ||
+                x.Category.Title.Contains(vmFilter.Q) ||
+                x.ImgAlt.Contains(vmFilter.Q) ||
+                x.ImgTitle.Contains(vmFilter.Q)
+            );
         }
 
         if (vmFilter.CategoryId is not null && vmFilter.CategoryId > 0)
         {
             query = query.Where(x => x.CategoryId == vmFilter.CategoryId);
         }
-        return await query
-            .Select(x => new VmBlogClientList
-            {
-                Id = x.Id,
-                Title = x.Title,
-                OrderView = x.OrderView,
-                MetaDescription = x.MetaDescription,
-                ImgUrl = x.ImgUrl,
-                ImgAlt = x.ImgAlt,
-                ImgTitle = x.ImgTitle,
-                PersianUpdateDate = x.UpdateDate.ToPersianDate(),
-            })
-            .OrderByDescending(x => x.OrderView).ThenByDescending(x => x.Id).GetPagiantionQuery(vm).ToListAsync();
+        return query.SelectBlogs();
     }
-    public static async Task<List<VmBlogClientShortLink>> GetLatest(this IQueryable<Blog> query, VmRequestPagination vm)
+    public static IQueryable<T> AppendPagination<T>(this IQueryable<T> query, VmRequestPagination pagination)
     {
-        return await query.BaseConditions()
-            .Select(x => new VmBlogClientShortLink
-            {
-                Id = x.Id,
-                Title = x.Title,
-                OrderView = x.OrderView,
-            })
-            .OrderByDescending(x => x.Id).GetPagiantionQuery(vm).ToListAsync();
+        return query.Skip(pagination.Skip).Take(pagination.Take);
     }
-
-    public static async Task<List<VmBlogClientShortLink>> GetSimilars(this IQueryable<Blog> query, Blog currentBlog, VmRequestPagination vm)
+    private static IQueryable<VmBlogClientList> SelectBlogs(this IQueryable<Blog> query)
     {
-        return await query.BaseConditions()
-        .GetSearchQuery(currentBlog.Title).Where(x =>
-        x.CategoryId == currentBlog.CategoryId
-        )
-            .Select(x => new VmBlogClientShortLink
-            {
-                Id = x.Id,
-                Title = x.Title,
-                OrderView = x.OrderView,
-            })
-            .OrderByDescending(x => x.Id).GetPagiantionQuery(vm).ToListAsync();
-    }
-    public static async Task<List<VmBlogClientShortLink>> GetRecommended(this IQueryable<Blog> query, VmRequestPagination vm)
-    {
-        return await query.BaseConditions()
-            .Select(x => new VmBlogClientShortLink
-            {
-                Id = x.Id,
-                Title = x.Title,
-                OrderView = x.OrderView,
-            })
-            .OrderByDescending(x => x.OrderView).GetPagiantionQuery(vm).ToListAsync();
-    }
-    private static IQueryable<Blog> BaseConditions(this IQueryable<Blog> query)
-    {
-        return query.Where(x => !x.IsHidden && !x.Category.IsHidden);
-    }
-    private static IQueryable<Blog> GetSearchQuery(this IQueryable<Blog> query, string q)
-    {
-        return query.Where(x =>
-        x.Description.Contains(q) ||
-        x.MetaDescription.Contains(q) ||
-        x.Title.Contains(q) ||
-        x.KeyWords.Contains(q) ||
-        x.Category.Title.Contains(q) ||
-        x.ImgAlt.Contains(q) ||
-        x.ImgTitle.Contains(q)
-        );
+        return query
+                    .Select(x => new VmBlogClientList
+                    {
+                        Id = x.Id,
+                        Title = x.Title,
+                        OrderView = x.OrderView,
+                        MetaDescription = x.MetaDescription,
+                        ImgUrl = x.ImgUrl,
+                        ImgAlt = x.ImgAlt,
+                        ImgTitle = x.ImgTitle,
+                        PersianUpdateDate = x.UpdateDate.ToPersianDate(),
+                    });
     }
 }
