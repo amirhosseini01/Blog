@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Site.Features.Blog;
 
 namespace Site.Pages
@@ -12,19 +13,18 @@ namespace Site.Pages
     public class SitemapModel : PageModel
     {
         private readonly IBlogRep _blogRep;
-        private readonly ICategoryRep _categoryRep;
-        public SitemapModel(ICategoryRep categoryRep, IBlogRep blogRep)
+        public SitemapModel(IBlogRep blogRep)
         {
-            _categoryRep = categoryRep;
             _blogRep = blogRep;
         }
-        public string SiteMapXML { get; set; }
-        public void OnGet()
+        public IReadOnlyList<Blog> Blogs { get; set; }
+        public async Task OnGet()
         {
-            // var blogs = await _blogRep.GetQuery().GetForIndex(new VmRequestPagination(Take: 50));
-            // StringBuilder sb = new();
-
-
+            Blogs = await _blogRep
+            .GetQuery()
+            .ConfigQuery()
+            .OrderByDescending(x => x.Id)
+            .ToListAsync();
         }
     }
 }
