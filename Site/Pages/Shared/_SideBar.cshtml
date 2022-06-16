@@ -6,10 +6,10 @@
         <div class="list-group">
             @foreach (var item in Model.Categories)
             {
-                <a asp-page="Search" asp-route-categoryId="@item.Id" title="@item.Title"
+                <a asp-page="Search" asp-route-categoryId="@item.Id" title="@Html.Raw(item.Title)"
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    @item.Title
-                    <span class="badge bg-primary rounded-pill">@item.BlogCount</span>
+                    @Html.Raw(item.Title)
+                    <span class="badge bg-primary rounded-pill">@Html.Raw(item.BlogCount)</span>
                 </a>
             }
         </div>
@@ -19,9 +19,9 @@
         <div class="list-group">
             @foreach (var item in Model.LatestBlogs)
             {
-                <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@item.Title"
+                <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@Html.Raw(item.Title)"
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    @item.Title
+                    @Html.Raw(item.Title)
                 </a>
             }
         </div>
@@ -31,9 +31,9 @@
         <div class="list-group">
             @foreach (var item in Model.RecommendedBlogs)
             {
-                <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@item.Title"
+                <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@Html.Raw(item.Title)"
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    @item.Title
+                    @Html.Raw(item.Title)
                 </a>
             }
         </div>

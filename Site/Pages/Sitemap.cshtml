@@ -9,14 +9,14 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>@websiteUrl</loc>
-        <lastmod>@DateTime.Now.ToString("yyyy-MM-dd")</lastmod>
+        <loc>@Html.Raw(websiteUrl)</loc>
+        <lastmod>@Html.Raw(DateTime.Now.ToString("yyyy-MM-dd"))</lastmod>
     </url>
     @foreach (var blog in Model.Blogs)
     {
         <url>
-            <loc>@websiteUrl/BlogDetail/@blog.Id</loc>
-            <lastmod>@blog.UpdateDate.ToString("yyyy-MM-dd")</lastmod>
+            <loc>@Html.Raw(websiteUrl+"/BlogDetail/"+blog.Id)</loc>
+            <lastmod>@Html.Raw(blog.UpdateDate.ToString("yyyy-MM-dd"))</lastmod>
         </url>
     }
 </urlset>

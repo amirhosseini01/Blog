@@ -19,13 +19,13 @@
                             <div class="card-body">
                                 <div class="row gy-4 gy-md-0">
                                     <div class="col-md-4">
-                                        <img src="@item.ImgUrl" alt="@item.ImgAlt" title="@item.Title" loading="lazy"
+                                        <img src="@item.ImgUrl" alt="@Html.Raw(item.ImgAlt)" title="@Html.Raw(item.Title)" loading="lazy"
                                         class="img-fluid">
                                     </div>
                                     <div class="col-md-8">
-                                        <h3>@item.Title</h3>
+                                        <h3>@Html.Raw(item.Title)</h3>
                                         <p>
-                                            @item.MetaDescription
+                                            @Html.Raw(item.MetaDescription)
                                         </p>
                                     </div>
                                 </div>
@@ -33,13 +33,13 @@
                             <div class="card-footer">
                                 <div class="d-flex">
                                     <div class="col-6 d-flex justify-content-start">
-                                        <a href="/BlogDetail/@item.Id" class="btn btn-primary" title="@item.Title">
+                                        <a href="/BlogDetail/@item.Id" class="btn btn-primary" title="@Html.Raw(item.Title)">
                                             ادامه مطلب
                                             <i class="bi bi-eye"></i>
                                         </a>
                                     </div>
                                     <div class="col-6 d-flex justify-content-end">
-                                        <span>تاریخ بروزرسانی: @item.PersianUpdateDate</span>
+                                        <span>تاریخ بروزرسانی: @Html.Raw(item.PersianUpdateDate)</span>
                                     </div>
                                 </div>
                             </div>
