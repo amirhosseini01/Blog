@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @await RenderSectionAsync("MetaTags", required: false)
     <title>@ViewData["Title"] - thisdev</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/bootstrap-icons/bootstrap-icons.css" />

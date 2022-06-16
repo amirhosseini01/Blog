@@ -2,8 +2,13 @@
 @model Site.Pages.BlogDetailModel
 @{
     ViewData["Title"] = Model.Blog.Title;
+    string KeyWords = Model.Blog.KeyWords.Replace("-", ",");
 }
-
+@section MetaTags{
+    <meta name="description" content="@Model.Blog.MetaDescription" />
+    <meta name="keywords" content="@KeyWords" />
+    <meta name="robots" content="index, follow" />
+}
 <div class="container-fluid rounded shadow p-5">
     <div class="d-flex justify-content-center">
         <div class="col-md-12 d-flex justify-content-center">

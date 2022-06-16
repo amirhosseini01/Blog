@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "Register confirmation";
 }
-
+@section MetaTags{
+    <meta name="robots" content="noindex, nofollow" />
+}
 <h1>@ViewData["Title"]</h1>
 @{
     if (@Model.DisplayConfirmAccountLink)
