@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Site.Areas_Admin_Pages;
 using Site.Data;
 using Site.Features.Menu;
 using System;
@@ -20,6 +21,16 @@ namespace SiteTest.Areas.Pages
                  .Options;
 
             dbContext = new DataBaseContext(options);
+        }
+        [Fact]
+        public async Task GetById_StatusCode_Ok()
+        {
+            IMenuRep menuRep = new MenuRep(dbContext);
+            MenusModel menusModel = new(menuRep);
+
+            var result = await menusModel.OnGetGetById(1);
+
+            Assert.False(result.StatusCode == 404, "status code is not successfull status code");
         }
     }
 }
