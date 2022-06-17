@@ -1,7 +1,7 @@
 function initTinymce() {
     tinymce.init({
         selector: 'textarea#VmInput_Description',
-        plugins: 'codesample code link autolink fullscreen autosave directionality emoticons lists pagebreak nonbreaking insertdatetime preview searchreplace table visualblocks visualchars wordcount image paste',
+        plugins: 'codesample code link autolink fullscreen autosave directionality emoticons lists pagebreak nonbreaking insertdatetime preview searchreplace table visualblocks visualchars wordcount image',
         codesample_languages: [
             { text: 'HTML/XML', value: 'markup' },
             { text: 'JavaScript', value: 'javascript' },
@@ -20,9 +20,9 @@ function initTinymce() {
         directionality : 'rtl',
         language: 'fa_IR',
         language_url: '/Admin/lib/tinymce/fa_IR.js',
-        paste_data_images: false,
-        paste_block_drop: false,
-        paste_as_text: true
+        // paste_data_images: false,
+        // paste_block_drop: false,
+        // paste_as_text: true
     });
 }
 
