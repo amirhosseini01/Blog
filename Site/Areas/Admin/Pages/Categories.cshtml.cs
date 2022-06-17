@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Site.Configurations;
 using Site.Configurations.ClaimHelper;
 using Site.Configurations.DataTableJs;
-using Site.Features.Blog;
+using Site.Features.BlogCategory;
 using Site.ViewModels;
 
 namespace Site.Areas_Admin_Pages;

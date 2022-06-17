@@ -2,7 +2,7 @@ using Site.Data;
 using Site.Models;
 using Site.Repositories.Generics;
 
-namespace Site.Features.Blog;
+namespace Site.Features.BlogCategory;
 public class CategoryRep : GenericRepository<Category>, ICategoryRep
 {
     private readonly DataBaseContext _context;

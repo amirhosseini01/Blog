@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Site.Features.Blog;
+using Site.Features.BlogCategory;
 using Site.Features.Menu;
 using Site.Models;
 

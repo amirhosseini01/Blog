@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Site.Features.Blog;
+using Site.Features.BlogCategory;
 using Site.ViewModels;
 
 namespace Site.Pages;

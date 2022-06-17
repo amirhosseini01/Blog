@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Site.Features.Blog;
+namespace Site.Features.BlogCategory;
 
 public class VmCategoryClientList
 {

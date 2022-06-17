@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Site.Configurations;
 using Site.ViewModels;
 
-namespace Site.Features.Blog;
+namespace Site.Features.BlogCategory;
 
 public static class CategoryService
 {
