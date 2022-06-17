@@ -76,10 +76,6 @@ public class BlogDetailModel : PageModel
             Title = VmInput.Title,
             Description = VmInput.Description,
             ImgUrl = uploadRes.Obj,
-            CreateDate = DateTime.Now,
-            UpdateDate = DateTime.Now,
-            CreateUserId = currentUserId,
-            UpdateUserId = currentUserId,
             CanonicalUrl = VmInput.CanonicalUrl,
             MetaDescription = VmInput.MetaDescription,
             CategoryId = VmInput.CategoryId,
@@ -89,7 +85,7 @@ public class BlogDetailModel : PageModel
             KeyWords = VmInput.KeyWords
         };
 
-        await _blogRep.Add(entity);
+        await _blogRep.Add(entity, currentUserId);
         var result = await _blogRep.Save();
         return new JsonResult(result);
     }

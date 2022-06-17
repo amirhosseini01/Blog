@@ -81,16 +81,12 @@ public class MenusModel : PageModel
         {
             Title = VmInput.Title,
             Url = VmInput.Url,
-            CreateDate = DateTime.Now,
-            UpdateDate = DateTime.Now,
-            CreateUserId = currentUserId,
-            UpdateUserId = currentUserId,
             IsHidden = false,
             IconClassName = VmInput.IconClassName,
             PId = VmInput.PId == 0 ? null : VmInput.PId,
         };
 
-        await _menuRep.Add(entity);
+        await _menuRep.Add(entity, currentUserId);
         var result = await _menuRep.Save();
         return new JsonResult(result);
     }

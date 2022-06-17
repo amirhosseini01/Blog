@@ -12,8 +12,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _context = context;
         _dbSet = _context.Set<T>();
     }
-    public async Task Add(T entity)
+    public async Task Add(T entity, string UserId)
     {
+        entity.UpdateUserId = UserId;
+        entity.CreateUserId = UserId;
+        entity.CreateDate = DateTime.Now;
+        entity.UpdateDate = DateTime.Now;
         await _dbSet.AddAsync(entity);
     }
     public void Update(T entity, string UpdateUserId)

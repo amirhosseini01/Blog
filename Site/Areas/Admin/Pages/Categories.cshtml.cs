@@ -68,14 +68,10 @@ public class CategoriesModel : PageModel
         Category entity = new()
         {
             Title = VmInput.Title,
-            CreateDate = DateTime.Now,
-            UpdateDate = DateTime.Now,
-            CreateUserId = currentUserId,
-            UpdateUserId = currentUserId,
             IsHidden = false,
         };
 
-        await _categoryRep.Add(entity);
+        await _categoryRep.Add(entity, currentUserId);
         var result = await _categoryRep.Save();
         return new JsonResult(result);
     }
