@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Site.Configurations;
 using Site.Features.Blog;
 using Site.Features.BlogCategory;
 using Site.ViewModels;
@@ -34,7 +35,7 @@ public class SearchModel : PageModel
             Q = q,
             CategoryId = categoryId
         })
-        .AppendPagination(new VmRequestPagination(Take: 50))
+        .GetPagiantionQuery(new VmRequestPagination(Take: 50))
         .ToListAsync();
 
         const int take = 4;
@@ -42,13 +43,13 @@ public class SearchModel : PageModel
            .GetQuery()
            .ConfigQuery()
            .GetShortLink(BlogClientFilterType.Recommended)
-           .AppendPagination(new VmRequestPagination(Take: take))
+           .GetPagiantionQuery(new VmRequestPagination(Take: take))
            .ToListAsync();
 
         LatestBlogs = await _blogRep.GetQuery()
         .ConfigQuery()
         .GetShortLink(BlogClientFilterType.Latest)
-        .AppendPagination(new VmRequestPagination(Take: take))
+        .GetPagiantionQuery(new VmRequestPagination(Take: take))
         .ToListAsync();
         Categories = await _categoryRep.GetQuery().GetForIndex(new VmRequestPagination(Take: take));
     }

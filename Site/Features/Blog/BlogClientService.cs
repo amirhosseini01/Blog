@@ -51,10 +51,6 @@ public static class BlogClientService
         }
         return query.SelectBlogs();
     }
-    public static IQueryable<T> AppendPagination<T>(this IQueryable<T> query, VmRequestPagination pagination)
-    {
-        return query.Skip(pagination.Skip).Take(pagination.Take);
-    }
     private static IQueryable<VmBlogClientList> SelectBlogs(this IQueryable<Blog> query)
     {
         return query

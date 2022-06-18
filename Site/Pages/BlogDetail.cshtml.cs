@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Site.Configurations;
 using Site.Features.Blog;
 using Site.Features.BlogCategory;
 using Site.ViewModels;
@@ -40,20 +41,20 @@ namespace Site.Pages
             .GetQuery()
             .ConfigQuery()
             .GetShortLink(BlogClientFilterType.Recommended)
-            .AppendPagination(new VmRequestPagination(Take: take))
+            .GetPagiantionQuery(new VmRequestPagination(Take: take))
             .ToListAsync();
 
             LatestBlogs = await _blogRep.GetQuery()
             .ConfigQuery()
             .GetShortLink(BlogClientFilterType.Latest)
-            .AppendPagination(new VmRequestPagination(Take: take))
+            .GetPagiantionQuery(new VmRequestPagination(Take: take))
             .ToListAsync();
 
             SimilarBlogs = await _blogRep
             .GetQuery()
             .ConfigQuery()
             .GetBlogs(new VmBlogFilter() {CategoryId = Blog.CategoryId, Q = Blog.Title})
-            .AppendPagination(new VmRequestPagination(Take: take))
+            .GetPagiantionQuery(new VmRequestPagination(Take: take))
             .ToListAsync();
             Categories = await _categoryRep.GetQuery().GetForIndex(new VmRequestPagination(Take: take));
 
