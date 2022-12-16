@@ -1,0 +1,56 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "صفحه اصلی";
+}
+@section MetaTags{
+    <meta name="description" content="مقالات و آموزش های برنامه نویسی به صورت رایگان" />
+    <meta name="keywords" content="آموزش برنامه نویسی, برنامه نویسی, تکنولوژی,C#, .NET" />
+    <meta name="robots" content="index, follow" />
+}
+<div class="container-fluid">
+    <div class="row gy-4 gy-md-0">
+        <div class="col-md-8">
+            <div class="row gy-4">
+                @foreach (var item in Model.Blogs)
+                {
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row gy-4 gy-md-0">
+                                    <div class="col-md-4">
+                                        <img src="@item.ImgUrl" alt="@Html.Raw(item.ImgAlt)" title="@Html.Raw(item.Title)" loading="lazy"
+                                        class="img-fluid">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h3>@Html.Raw(item.Title)</h3>
+                                        <p>
+                                            @Html.Raw(item.MetaDescription)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex">
+                                    <div class="col-6 d-flex justify-content-start">
+                                        <a href="/BlogDetail/@item.Id" class="btn btn-primary" title="@Html.Raw(item.Title)">
+                                            ادامه مطلب
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end">
+                                        <span>تاریخ بروزرسانی: @Html.Raw(item.PersianUpdateDate)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <partial name="_SideBar" model="@(Model.Categories, Model.LatestBlogs, Model.RecommendedBlogs)" />
+        </div>
+    </div>
+</div>

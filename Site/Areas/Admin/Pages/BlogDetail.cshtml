@@ -1,0 +1,172 @@
+@page "{id?}"
+@model Site.Areas_Admin_Pages.BlogDetailModel
+@{
+    ViewData["Title"] = "جزئیات بلاگ";
+    bool isCreateMode = Model.Id is null;
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                    @if (isCreateMode)
+                    {
+                        
+                            <span>افزودن</span>
+                    }
+                    else
+                    {
+                        <span>ویرایش</span>
+                    }
+                    <i class="fa fa-save"></i>
+                    </h3>
+                </div>
+                <form id="frm" method="post">
+                    <div class="box-body">
+                        <div class="row gy-5">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.CategoryId"></label> <span class="text-danger">*</span>
+                                    <select asp-for="VmInput.CategoryId" class="form-control">
+                                        <option value="">انتخاب کنید</option>
+                                        @foreach (var item in Model.Categories)
+                                        {
+                                            <option value="@item.Id">@item.Title</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="VmInput.CategoryId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.Title"></label> <span class="text-danger">*</span>
+                                    <input asp-for="VmInput.Title" class="form-control">
+                                    <span asp-validation-for="VmInput.Title" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.IsHidden"></label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" asp-for="VmInput.IsHidden"> عدم انتشار / انتشار
+                                        </label>
+                                    </div>
+                                    <span asp-validation-for="VmInput.IsHidden" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.KeyWords"></label>
+                                    <span class="text-danger">*</span>
+                                    <textarea asp-for="VmInput.KeyWords" class="form-control"
+                                        rows="5" placeholder="کلمات کلیدی را با - از یکدیگر جدا کنید"></textarea>
+                                    <span asp-validation-for="VmInput.KeyWords" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.MetaDescription"></label>
+                                    <span class="text-danger">*</span>
+                                    <textarea asp-for="VmInput.MetaDescription" class="form-control"
+                                        rows="5"></textarea>
+                                    <span asp-validation-for="VmInput.MetaDescription" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.Description"></label> <span class="text-danger">*</span>
+                                    <textarea asp-for="VmInput.Description" class="form-control" rows="5"></textarea>
+                                    <span asp-validation-for="VmInput.Description" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.ImgBase64"></label> <span class="text-danger">*</span>
+                                    <input type="file" id="imgInput" class="form-control" onchange="ReadFile(input= this, imgRes= '#imgHolderRes', imgParent= '#imgHolder')">
+                                    <span asp-validation-for="VmInput.ImgBase64" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div id="imgHolder" class="col-md-6" style="display: none;">
+                                <div class="form-group">
+                                    <img id="imgHolderRes" src="" class="img-fluid" height="100">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.ImgTitle"></label> <span class="text-danger">*</span>
+                                    <input asp-for="VmInput.ImgTitle" class="form-control">
+                                    <span asp-validation-for="VmInput.ImgTitle" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.ImgAlt"></label> <span class="text-danger">*</span>
+                                    <input asp-for="VmInput.ImgAlt" class="form-control">
+                                    <span asp-validation-for="VmInput.ImgAlt" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="VmInput.CanonicalUrl"></label>
+                                    <input asp-for="VmInput.CanonicalUrl" class="form-control">
+                                    <span asp-validation-for="VmInput.CanonicalUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <input asp-for="VmInput.Id" type="hidden">
+                    <input asp-for="VmInput.ImgBase64" type="hidden">
+                </form>
+                <div class="box-footer">
+                    <a asp-area="Admin" asp-page="Blogs" class="btn btn-danger">
+                        بازگشت
+                        <i class="fa fa-close"></i>
+                    </a>
+                    <button type="button" class="btn btn-primary" onclick="SubmitForm(serverUrl)">
+                    ذخیره
+                        <i class="fa fa-save"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.AntiForgeryToken()
+@section Scripts{
+    <partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/ImgJs/_ResizerImg.cshtml" />
+    <partial name="~/Areas/Admin/Pages/Shared/StaticRefrences/_Tinymce.cshtml" />
+    <partial name="~/Pages/Shared/_ValidationScriptsPartial.cshtml" />
+    <script type="text/javascript" src="~/Admin/js/pages/BlogDetail.js"></script>
+    <script>
+        var modelImgUrl = ''
+    </script>
+    @if(isCreateMode)
+    {
+        <script>
+            var serverUrl = '@Url.Page("BlogDetail","Add")'
+        </script>
+    }
+    else
+    {
+        <script>
+            var serverUrl = '@Url.Page("BlogDetail","Edit")'
+            modelImgUrl = '@Model.VmInput.ImgUrl'
+            ShowImageHolder(imgRes= '#imgHolderRes', imgParent= '#imgHolder', srcVal = modelImgUrl)
+        </script>
+    }
+
+}

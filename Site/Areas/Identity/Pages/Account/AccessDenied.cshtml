@@ -1,0 +1,15 @@
+﻿@page
+@model Site.Areas.Identity.Pages.Account.AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+}
+@section MetaTags{
+    <meta name="robots" content="noindex, nofollow" />
+}
+<header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">You do not have access to this resource.</p>
+    <p class="text-danger">
+        <a asp-page="Login" asp-route-returnUrl="@Model.ReturnUrl">Click here to login with another account</a>
+    </p>
+</header>

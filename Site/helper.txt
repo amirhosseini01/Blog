@@ -1,0 +1,13 @@
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool update -g dotnet-aspnet-codegenerator
+dotnet-aspnet-codegenerator razorpage Index Empty  -outDir Areas/Admin/Pages
+-----
+dotnet ef migrations add InitialCreate --context ApplicationIdentityDbContext
+dotnet ef database update --context ApplicationIdentityDbContext
+-----
+dotnet ef migrations add InitialCreate --context DataBaseContext
+dotnet ef database update --context DataBaseContext
+-----
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool update -g dotnet-aspnet-codegenerator
+dotnet-aspnet-codegenerator razorpage BlogsManagement Empty -outDir Areas/Admin/Pages

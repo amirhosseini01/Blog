@@ -1,0 +1,22 @@
+@page "/sitemap.xml"
+@model Site.Pages.SitemapModel
+@{
+    Layout = null;
+    Response.ContentType = "text/xml";
+    await Response.Body.WriteAsync(System.Text.Encoding.UTF8.GetBytes("<?xml version='1.0' encoding='UTF-8' ?>"));
+    string websiteUrl = "https://thisdev.ir";
+}
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>@Html.Raw(websiteUrl)</loc>
+        <lastmod>@Html.Raw(DateTime.Now.ToString("yyyy-MM-dd"))</lastmod>
+    </url>
+    @foreach (var blog in Model.Blogs)
+    {
+        <url>
+            <loc>@Html.Raw(websiteUrl+"/BlogDetail/"+blog.Id)</loc>
+            <lastmod>@Html.Raw(blog.UpdateDate.ToString("yyyy-MM-dd"))</lastmod>
+        </url>
+    }
+</urlset>

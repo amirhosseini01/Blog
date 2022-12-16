@@ -1,0 +1,42 @@
+@using Site.Features.Blog;
+@using Site.Features.BlogCategory;
+@model (List<VmCategoryClientList> Categories, List<VmBlogClientShortLink> LatestBlogs, List<VmBlogClientShortLink> RecommendedBlogs)
+<div class="row gy-4">
+    <div class="col-12">
+        <h6>دسته بندی ها</h6>
+        <div class="list-group">
+            @foreach (var item in Model.Categories)
+            {
+                <a asp-page="Search" asp-route-categoryId="@item.Id" title="@Html.Raw(item.Title)"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    @Html.Raw(item.Title)
+                    <span class="badge bg-primary rounded-pill">@Html.Raw(item.BlogCount)</span>
+                </a>
+            }
+        </div>
+    </div>
+    <div class="col-12">
+        <h6>آخرین مقاله ها</h6>
+        <div class="list-group">
+            @foreach (var item in Model.LatestBlogs)
+            {
+                <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@Html.Raw(item.Title)"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    @Html.Raw(item.Title)
+                </a>
+            }
+        </div>
+    </div>
+    <div class="col-12">
+        <h6>مقالات پیشنهادی</h6>
+        <div class="list-group">
+            @foreach (var item in Model.RecommendedBlogs)
+            {
+                <a asp-page="BlogDetail" asp-route-id="@item.Id" title="@Html.Raw(item.Title)"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    @Html.Raw(item.Title)
+                </a>
+            }
+        </div>
+    </div>
+</div>

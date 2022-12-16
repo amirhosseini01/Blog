@@ -1,0 +1,32 @@
+@model (IMenuRep _menuRep, string currentPageUrl)
+@{
+  var menus = Model._menuRep.GetQuery().OrderByDescending(x => x.OrderView).ToList();
+}
+
+
+<ul class="sidebar-menu" data-widget="tree">
+  <li class="header">منو</li>
+  @foreach (var sub in menus.Where(x=> x.PId is null))
+  {
+    <li class="@(menus.Any(x=>x.Url == Model.currentPageUrl && x.PId == sub.Id)? "active": "") treeview">
+      <a href="#">
+        <i class="@sub.IconClassName"></i> 
+        <span>@sub.Title</span>
+        <span class="pull-left-container">
+          <i class="fa fa-angle-right pull-left"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        @foreach (var child in menus.Where(x => x.PId == sub.Id))
+        {
+          <li class="@(child.Url.Contains(Model.currentPageUrl) ? "active": "")">
+            <a href="@child.Url">
+              <i class="fa fa-circle-o"></i>
+              @child.Title
+            </a>
+          </li>
+        }
+      </ul>
+    </li>
+  }
+</ul>
